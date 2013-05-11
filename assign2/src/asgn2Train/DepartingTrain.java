@@ -41,6 +41,7 @@ public class DepartingTrain {
 	private static final String CANNOT_BE_ADDED_TRAIN_HAS_PASSENGER = "Carriage cannot be added because train has passengers onboard";
 	private static final String CANNOT_BE_REMOVED_TRAIN_HAS_PASSENGER = "Carriage cannot be removed because train has passengers onboard";
 	private static final String NO_ROLLING_STOCK_TO_REMOVED = "There is no Rolling Stock in the train";
+	private static final String CANNOT_ADD_PASSENGERCAR_AFTER_FREIGHTCAR = "Passenger Car cannot be added after a Freight Car";
 
 	private Locomotive locomotive;
 	private List<RollingStock> carriages;
@@ -82,6 +83,8 @@ public class DepartingTrain {
 		} else if (newCarriage instanceof FreightCar) {
 			carriages.add(newCarriage);
 		} else if (newCarriage instanceof PassengerCar) {
+			if(carriages.size() >= 1 && carriages.get(carriages.size()-1) instanceof FreightCar)
+				throw new TrainException(CANNOT_ADD_PASSENGERCAR_AFTER_FREIGHTCAR);
 			carriages.add(newCarriage);
 		}
 	}

@@ -21,7 +21,7 @@ public class TrainTest {
 			train.addCarriage(new PassengerCar(40, 15));
 			train.addCarriage(new PassengerCar(40, 20));
 			train.addCarriage(new FreightCar(20, "D"));
-			train.addCarriage(new PassengerCar(40, 35));
+			train.addCarriage(new FreightCar(20, "D"));
 						
 			
 			train.removeCarriage();
