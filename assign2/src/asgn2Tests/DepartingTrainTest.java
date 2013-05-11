@@ -1,8 +1,8 @@
 package asgn2Tests;
 
-import org.junit.Assert;
+import static org.junit.Assert.*;
+
 import org.junit.Test;
-import org.junit.Assert.*;
 
 import asgn2Train.DepartingTrain;
 
@@ -14,12 +14,12 @@ public class DepartingTrainTest {
 	@Test
 	public void testTrainCannotMoveWithoutLocomotive(){
 		DepartingTrain departingTrain = new DepartingTrain();
-		Assert.assertFalse("train cannot move without locomotive", departingTrain.trainCanMove());
+		assertFalse("train cannot move without locomotive", departingTrain.trainCanMove());
 	}
 	
 	@Test
 	public void testTrainConstructorNotNull(){
 		DepartingTrain departingTrain = new DepartingTrain();
-		Assert.assertTrue("train instance is null", departingTrain != null);
+		assertTrue("train instance is null", departingTrain != null);
 	}
 }
