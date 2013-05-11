@@ -16,4 +16,10 @@ public class DepartingTrainTest {
 		DepartingTrain departingTrain = new DepartingTrain();
 		Assert.assertFalse("train cannot move without locomotive", departingTrain.trainCanMove());
 	}
+	
+	@Test
+	public void testTrainConstructorNotNull(){
+		DepartingTrain departingTrain = new DepartingTrain();
+		Assert.assertTrue("train instance is null", departingTrain != null);
+	}
 }
