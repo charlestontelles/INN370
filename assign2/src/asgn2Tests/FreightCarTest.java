@@ -11,7 +11,7 @@ public class FreightCarTest {
 	private static final int NEGATIVE_WEIGHT = -1;
 	
 	/**
-	 * Try to create a new FreightCar using a negative gross weight...
+	 * Try to create a new FreightCar using a negative gross weight....
 	 * Expected a trainException.
 	 * 
 	 * @throws TrainException
