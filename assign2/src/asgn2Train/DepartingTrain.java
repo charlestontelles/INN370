@@ -42,6 +42,7 @@ public class DepartingTrain {
 	private static final String CANNOT_BE_REMOVED_TRAIN_HAS_PASSENGER = "Carriage cannot be removed because train has passengers onboard";
 	private static final String NO_ROLLING_STOCK_TO_REMOVED = "There is no Rolling Stock in the train";
 	private static final String CANNOT_ADD_PASSENGERCAR_AFTER_FREIGHTCAR = "Passenger Car cannot be added after a Freight Car";
+	private static final String CANNOT_BOARD_NEGATIVE_NUMBER_OF_PASSANGER = "Negative number of passengers cannot be boarded";
 
 	private Locomotive locomotive;
 	private List<RollingStock> carriages;
@@ -104,6 +105,8 @@ public class DepartingTrain {
 	 *             if the number of new passengers is negative
 	 */
 	public Integer board(Integer newPassengers) throws TrainException {
+		if (newPassengers < 0)
+			throw new TrainException(CANNOT_BOARD_NEGATIVE_NUMBER_OF_PASSANGER);
 		int remainingPassenger = newPassengers;
 		for (RollingStock rs : carriages) {
 			if (rs instanceof PassengerCar
