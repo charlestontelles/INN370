@@ -137,8 +137,13 @@ public class DepartingTrain {
 			carriagePointer = 0;
 			return locomotive;
 		} else {
-			carriagePointer = 1;
-			return carriages.get(0);
+			if (carriages.size() > 0){
+				carriagePointer = 1;
+				return carriages.get(0);
+			} else {
+				carriagePointer = 0;
+				return null;
+			}
 		}
 	}
 
