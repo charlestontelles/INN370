@@ -21,7 +21,9 @@ public class PassengerCarTest {
 	private static final int SEATS_CAPACITY = 50;
 	private static final int GROSS_WEIGHT = 100;
 	private static final int NEGATIVE_PASSENGER = -5;
-	private static final int NUMBER_OF_PASSENGER_TOBOARD = 70;
+	private static final int NUMBER_OF_PASSENGER_TO_BOARD = 70;
+	private static final int NUMBER_OF_PASSENGER_TO_DEPART = 70;
+	private static final Integer NEGATIVE_NUMBER_OF_PASSENGER_TO_DEPART = -1;
 
 
 	/**
@@ -55,8 +57,8 @@ public class PassengerCarTest {
 	@Test 
 	public void testPassengerCarNumberOfSeats() 
 			throws TrainException {
-		PassengerCar passengarCar = new PassengerCar(GROSS_WEIGHT, SEATS_CAPACITY);	
-		assertTrue("Invalid return of installed seats capacity", passengarCar.numberOfSeats() == SEATS_CAPACITY);
+		PassengerCar passengerCar = new PassengerCar(GROSS_WEIGHT, SEATS_CAPACITY);	
+		assertTrue("Invalid return of installed seats capacity", passengerCar.numberOfSeats() == SEATS_CAPACITY);
 	}
 
 	/** Call PassengerCar constructor with negative the number of 
@@ -79,8 +81,8 @@ public class PassengerCarTest {
 	@Test(expected = TrainException.class)
 	public void testWithNegativeNumberOfPeopleToBoard() 
 			throws TrainException {
-		PassengerCar passengarCar = new PassengerCar(GROSS_WEIGHT, SEATS_CAPACITY);	
-		passengarCar.board(NEGATIVE_PASSENGER);
+		PassengerCar passengerCar = new PassengerCar(GROSS_WEIGHT, SEATS_CAPACITY);	
+		passengerCar.board(NEGATIVE_PASSENGER);
 	}
 
 	/**
@@ -93,8 +95,21 @@ public class PassengerCarTest {
 	@Test 
 	public void testToReturnMaximumPersonCanBoardOnCarriage() 
 			throws TrainException {
-		PassengerCar passengarCar = new PassengerCar(GROSS_WEIGHT, SEATS_CAPACITY);	//seats capacity 50
-		passengarCar.board(NUMBER_OF_PASSENGER_TOBOARD);  //passenger to board is more than seats capacity
-		assertTrue("Cannot accomodate more than its seats capacity", passengarCar.numberOfSeats() == SEATS_CAPACITY);
+		PassengerCar passengerCar = new PassengerCar(GROSS_WEIGHT, SEATS_CAPACITY);	//seats capacity 50
+		passengerCar.board(NUMBER_OF_PASSENGER_TO_BOARD);  //passenger to board is more than seats capacity
+		assertTrue("Cannot accomodate more than its seats capacity", passengerCar.numberOfSeats() == SEATS_CAPACITY);
+	}
+	
+	/**
+	 * Create passenger car instance and try to align with negative passenger to
+	 * depart from carriage. Then it should throw TrainException
+	 * 
+	 * @throws TrainException
+	 */
+	@Test (expected = TrainException.class)
+	public void testPassengerAlightmentWithNegativePassenger() 
+			throws TrainException {
+		PassengerCar passengerCar = new PassengerCar(GROSS_WEIGHT, SEATS_CAPACITY);	//seats capacity 50
+		passengerCar.alight(NEGATIVE_NUMBER_OF_PASSENGER_TO_DEPART);
 	}
 }
