@@ -23,7 +23,7 @@ public class PassengerCarTest {
 	private static final int NEGATIVE_PASSENGER = -5;
 	private static final int NUMBER_OF_PASSENGER_TO_BOARD = 70;
 	private static final int NUMBER_OF_PASSENGER_TO_DEPART = 70;
-	private static final Integer NEGATIVE_NUMBER_OF_PASSENGER_TO_DEPART = -1;
+	private static final int NEGATIVE_NUMBER_OF_PASSENGER_TO_DEPART = -1;
 
 
 	/**
@@ -111,5 +111,21 @@ public class PassengerCarTest {
 			throws TrainException {
 		PassengerCar passengerCar = new PassengerCar(GROSS_WEIGHT, SEATS_CAPACITY);	//seats capacity 50
 		passengerCar.alight(NEGATIVE_NUMBER_OF_PASSENGER_TO_DEPART);
+	}
+	
+	/**
+	 * Create passenger car instance and try to call align with 
+	 * number of departing passengers exceeds the number on board.
+	 * Then it should throw TrainException
+	 * 
+	 * @throws TrainException
+	 */
+	@Test (expected = TrainException.class)
+	public void testPassengerAlightmentWithExceedsNumberOnBoard() 
+			throws TrainException {
+		PassengerCar passengerCar = new PassengerCar(GROSS_WEIGHT, SEATS_CAPACITY);	//seats capacity 50
+		
+		passengerCar.board(SEATS_CAPACITY);
+		passengerCar.alight(NUMBER_OF_PASSENGER_TO_DEPART);
 	}
 }
