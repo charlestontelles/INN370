@@ -19,13 +19,13 @@ public class FreightCarTest {
 	
 	/**
 	 * Create a new FreightCar using a negative gross weight.
-	 * Expected a trainException.
+	 * Expected to throw trainException.
 	 * 
 	 * @throws TrainException
 	 */
-	@Test (expected = TrainException.class)
-	public void testNewFreightCarWithNegativeWeight() throws TrainException{
-		FreightCar freightCar = new FreightCar(NEGATIVE_GROSS_WEIGHT, VALID_GOOD_TYPE);
+	@Test(expected = TrainException.class)
+	public void testFreightCarWithNegativeWeight() throws TrainException{
+		new FreightCar(NEGATIVE_GROSS_WEIGHT, VALID_GOOD_TYPE);
 	}
 
 	
@@ -44,14 +44,27 @@ public class FreightCarTest {
 	/**
 	 * Create new FreightCar with valid gross weight and valid 
 	 * goodtype
-	 * Expected  to return true 
+	 * Expected  to return true
 	 * 
 	 *@throws TrainException
 	 */
 	
-	@Test
-	public void testFreightCarWithInvalidGoodType() throws TrainException{
+	@Test 
+	public void testFreightCarWithValidGoodType() throws TrainException{
 		FreightCar freightCar = new FreightCar(VALID_GROSS_WEIGHT , VALID_GOOD_TYPE);
 	    assertTrue("Invalid good type", freightCar.goodsType() == VALID_GOOD_TYPE);
+ 	}
+	
+	/** Create FreightCar instance with valid gross weight and valid 
+	 * good type. Then compare with invalid good type.Then expect to 
+	 * return false for the statement
+	 * 
+	 * @throws TrainException 
+	 * 
+	 */
+	@Test
+	public void testFreightCaWithInvalidGoodType() throws TrainException{
+		FreightCar freightCar = new FreightCar(VALID_GROSS_WEIGHT , VALID_GOOD_TYPE);
+		assertFalse("Invalid good type",freightCar.goodsType() == INVALID_GOOD_TYPE);
 	}
 }
