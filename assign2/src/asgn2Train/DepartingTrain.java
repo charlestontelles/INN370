@@ -83,8 +83,10 @@ public class DepartingTrain {
 		} else if (newCarriage instanceof FreightCar) {
 			carriages.add(newCarriage);
 		} else if (newCarriage instanceof PassengerCar) {
-			if(carriages.size() >= 1 && carriages.get(carriages.size()-1) instanceof FreightCar)
-				throw new TrainException(CANNOT_ADD_PASSENGERCAR_AFTER_FREIGHTCAR);
+			if (carriages.size() >= 1
+					&& carriages.get(carriages.size() - 1) instanceof FreightCar)
+				throw new TrainException(
+						CANNOT_ADD_PASSENGERCAR_AFTER_FREIGHTCAR);
 			carriages.add(newCarriage);
 		}
 	}
@@ -153,7 +155,11 @@ public class DepartingTrain {
 	 *         nextCarriage, or null if there is no such carriage
 	 */
 	public RollingStock nextCarriage() {
-		return carriages.get(++carriagePointer);
+		if (++carriagePointer == 0)
+			return locomotive;
+		else
+			return carriagePointer > carriages.size() ? null : carriages
+					.get(carriagePointer - 1);
 	}
 
 	/**
