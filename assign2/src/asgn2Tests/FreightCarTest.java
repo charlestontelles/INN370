@@ -6,6 +6,7 @@ import org.junit.Test;
 
 import asgn2Exceptions.TrainException;
 import asgn2RollingStock.FreightCar;
+import asgn2RollingStock.Locomotive;
 
 
 public class FreightCarTest {
@@ -66,5 +67,17 @@ public class FreightCarTest {
 	public void testFreightCaWithInvalidGoodType() throws TrainException{
 		FreightCar freightCar = new FreightCar(VALID_GROSS_WEIGHT , VALID_GOOD_TYPE);
 		assertFalse("Invalid good type",freightCar.goodsType() == INVALID_GOOD_TYPE);
+	}
+	
+	/**
+	 * Creates a new locomotive instance  and verifies the toString call contains the
+	 * valid goodtype
+	 * 
+	 * @throws TrainException
+	 */
+	@Test
+	public void testToStringHasOverride() throws TrainException {
+		FreightCar freightCar = new FreightCar(VALID_GROSS_WEIGHT , VALID_GOOD_TYPE);
+		assertTrue("Method toString() has not been overrided ",freightCar.toString().contains(VALID_GOOD_TYPE));
 	}
 }
