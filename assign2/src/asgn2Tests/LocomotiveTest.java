@@ -18,8 +18,9 @@ public class LocomotiveTest {
 
 	private static final String VALID_CLASSIFICATION = "4D";
 	private static final String INVALID_CLASSIFICATION = "ABC";
-	private static final Integer NEGATIVE_GROSSWEIGHT = -1;
-	private static final Integer ZERO_GROSSWEIGHT = 0;
+	private static final int NEGATIVE_GROSSWEIGHT = -1;
+	private static final int ZERO_GROSSWEIGHT = 0;
+	private static final int VALID_GROSS_WEIGHT = 100;
 
 
 	/**
@@ -52,8 +53,9 @@ public class LocomotiveTest {
 	 */	
 	@Test
 	public void testLocomotivePowerEngine() throws TrainException {
-		Locomotive locomotive = new Locomotive(100, VALID_CLASSIFICATION);
-		assertTrue("Invalid pulling power",locomotive.power() == 400);
+		Locomotive locomotive = new Locomotive(VALID_GROSS_WEIGHT, VALID_CLASSIFICATION);
+		int enginePower = new Integer(VALID_CLASSIFICATION.substring(0, 1)) * 100;
+		assertTrue("Invalid pulling power",locomotive.power() == enginePower);
 	}
 	
 	
@@ -65,6 +67,18 @@ public class LocomotiveTest {
 	 */
 	@Test(expected = TrainException.class)
 	public void testLocomotiveWithInvalidClassification() throws TrainException{
-        new Locomotive(100, INVALID_CLASSIFICATION);
+        new Locomotive(VALID_GROSS_WEIGHT, INVALID_CLASSIFICATION);
+	}
+	
+	/**
+	 * Creates a new locomotive instance  and verifies the toString call contains the
+	 * valid classification
+	 * 
+	 * @throws TrainException
+	 */
+	@Test
+	public void testToStringHasOverride() throws TrainException {
+		Locomotive locomotive = new Locomotive(VALID_GROSS_WEIGHT, VALID_CLASSIFICATION);
+		assertTrue("Method toString() has not been overrided ",locomotive.toString().contains(VALID_CLASSIFICATION));
 	}
 }
