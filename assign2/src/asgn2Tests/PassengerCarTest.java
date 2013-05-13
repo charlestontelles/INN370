@@ -8,7 +8,6 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 import asgn2Exceptions.TrainException;
-import asgn2RollingStock.Locomotive;
 import asgn2RollingStock.PassengerCar;
 
 /**
