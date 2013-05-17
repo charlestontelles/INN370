@@ -37,6 +37,26 @@ import asgn2RollingStock.RollingStock;
  */
 public class DepartingTrain {
 
+	/**
+	 * For convenience the Locomotive object will be stored in a separate
+	 * variable rather than the carriages List
+	 */
+	private Locomotive locomotive;
+
+	/**
+	 * Stores all carriages for a departing trains excluding the locomotive
+	 */
+	private List<RollingStock> carriages;
+
+	/**
+	 * Variable used by firstCarriage and nextCarriage methods in order to
+	 * manage the current carriage to be retrieved
+	 */
+	private int carriagePointer;
+
+	/**
+	 * Error messages to be used by train Exception
+	 */
 	private static final String LOCOMOTIVE_ALREADY_EXISTS = "Locomotive already exists";
 	private static final String CANNOT_BE_ADDED_TRAIN_HAS_PASSENGER = "Carriage cannot be added because train has passengers onboard";
 	private static final String CANNOT_BE_REMOVED_TRAIN_HAS_PASSENGER = "Carriage cannot be removed because train has passengers onboard";
@@ -44,17 +64,15 @@ public class DepartingTrain {
 	private static final String CANNOT_ADD_PASSENGERCAR_AFTER_FREIGHTCAR = "Passenger Car cannot be added after a Freight Car";
 	private static final String CANNOT_BOARD_NEGATIVE_NUMBER_OF_PASSANGER = "Negative number of passengers cannot be boarded";
 
-	private Locomotive locomotive;
-	private List<RollingStock> carriages;
-
-	private int carriagePointer;
-
 	/**
 	 * Constructs a (potential) train object containing no carriages (yet).
+	 * 
+	 * CarriagePointer is initialized with -1 which means no carriages and no
+	 * locomotive.
 	 */
 	public DepartingTrain() {
 		this.carriages = new ArrayList<RollingStock>();
-		this.carriagePointer = 0;
+		this.carriagePointer = -1;
 	}
 
 	/**
@@ -137,7 +155,7 @@ public class DepartingTrain {
 			carriagePointer = 0;
 			return locomotive;
 		} else {
-			if (carriages.size() > 0){
+			if (carriages.size() > 0) {
 				carriagePointer = 1;
 				return carriages.get(0);
 			} else {
@@ -163,7 +181,7 @@ public class DepartingTrain {
 	 *         nextCarriage, or null if there is no such carriage
 	 */
 	public RollingStock nextCarriage() {
-		if (++carriagePointer == 0)
+		if (carriagePointer++ == -1)
 			return locomotive;
 		else
 			return carriagePointer > carriages.size() ? null : carriages
@@ -257,7 +275,7 @@ public class DepartingTrain {
 	 * In the degenerate case of a "train" which doesn't have any rolling stock
 	 * at all yet, the method returns true.
 	 * 
-	 * @return true if the train can move (or contains no carriages), false
+	 * @return boolean - true if the train can move (or contains no carriages), false
 	 *         otherwise
 	 */
 	public boolean trainCanMove() {
@@ -269,8 +287,10 @@ public class DepartingTrain {
 	}
 
 	/**
+	 * Verifies the departing trains has passengers on board.
 	 * 
-	 * @return
+	 * @return true if departing train has passengers on board, and returns
+	 *         false otherwise.
 	 */
 	private boolean hasPassenger() {
 		for (RollingStock rs : carriages) {
@@ -284,8 +304,9 @@ public class DepartingTrain {
 	}
 
 	/**
+	 * Sum up weights for each carriage.
 	 * 
-	 * @return
+	 * @return int - total weight of the departing train.
 	 */
 	private int getTotalWeigth() {
 		int totalWeight = 0;

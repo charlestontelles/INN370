@@ -11,6 +11,8 @@ import asgn2Exceptions.TrainException;
 import asgn2RollingStock.PassengerCar;
 
 /**
+ * Test cases for PassengerCar class.
+ * 
  * @author Phurpa
  *
  */
@@ -24,7 +26,7 @@ public class PassengerCarTest {
 	private static final int NUMBER_OF_PASSENGER_TO_BOARD = 70;
 	private static final int NUMBER_OF_PASSENGER_TO_DEPART = 70;
 	private static final int NEGATIVE_NUMBER_OF_PASSENGER_TO_DEPART = -1;
-	private static final int NUMBER_OF_PESSENGER_TO_BOARD = 30; //A 
+	private static final int NUMBER_OF_PASSENGER_TO_BOARD2 = 30; //A 
 	private static final int NUMBER_OF_PASSENGER_TO_ALIGHT = 5; //B
 	private static final int PESSENGER_ON_BOARD = 25; //Difference of A-B
 
@@ -145,11 +147,29 @@ public class PassengerCarTest {
 			throws TrainException {
 		PassengerCar passengerCar = new PassengerCar(GROSS_WEIGHT, SEATS_CAPACITY);	//seats capacity 50
 
-		passengerCar.board(NUMBER_OF_PESSENGER_TO_BOARD);//30 person on board
+		passengerCar.board(NUMBER_OF_PASSENGER_TO_BOARD2);//30 person on board
 
 		passengerCar.alight(NUMBER_OF_PASSENGER_TO_ALIGHT);//5 person alight/depart
 
 		assertTrue("Invalid alight from the train", passengerCar.numberOnBoard() == PESSENGER_ON_BOARD);
+	}
+	
+	/**
+	 * Creates a new passengerCar with capacity to 50 seat. Then board two set of 30 passengers.
+	 * Expected 10 passenger to be left out. 
+	 *
+	 * @throws TrainException
+	 */
+	@Test 
+	public void testNumberOfPassengerLeftOut() 
+			throws TrainException {
+		PassengerCar passengerCar = new PassengerCar(GROSS_WEIGHT, SEATS_CAPACITY);	//seats capacity 50
+
+		passengerCar.board(NUMBER_OF_PASSENGER_TO_BOARD2);//30 person on board
+		
+		int leftOut = passengerCar.board(NUMBER_OF_PASSENGER_TO_BOARD2);//30 person on board
+
+		assertTrue("Invalid number of passenger left out", leftOut == 10);
 	}
 
 	/**

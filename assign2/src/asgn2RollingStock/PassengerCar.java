@@ -86,8 +86,8 @@ public class PassengerCar extends RollingStock {
 		if (numberOfSeats - passengerOnBoard >= newPassengers){
 			passengerOnBoard += newPassengers;
 		}else{
-			passengerOnBoard += numberOfSeats - passengerOnBoard;
-			unableToBoard = newPassengers - passengerOnBoard;
+			unableToBoard = newPassengers - (numberOfSeats - passengerOnBoard);
+			passengerOnBoard += numberOfSeats - passengerOnBoard;			
 		}
 		return unableToBoard;
 	}

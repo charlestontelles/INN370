@@ -1,6 +1,5 @@
 package asgn2Tests;
 
-//import static org.junit.Assert.*;
 
 import static org.junit.Assert.*;
 
@@ -9,8 +8,15 @@ import org.junit.Test;
 import asgn2Exceptions.TrainException;
 import asgn2RollingStock.Locomotive;
 import asgn2RollingStock.PassengerCar;
+import asgn2RollingStock.RollingStock;
 import asgn2Train.DepartingTrain;
 
+/**
+ * Test Cases for DepartingTrain. 
+ * 
+ * @author Phurpa and Charleston
+ *
+ */
 public class DepartingTrainTest {
 	private static final int PASSENGERCAR_SEAT_CAPACITY = 50;
 	private static final int NEGATIVE_NUMBER = -5;
@@ -127,6 +133,97 @@ public class DepartingTrainTest {
 		assertFalse("Train overloaded", departingTrain.trainCanMove());
 	}
 	
-	
+	/**
+	 * Creates a train with no carriage and calls getNext method.
+	 * Expected null as result.
+	 * 
+	 * @throws TrainException
+	 */
+	@Test
+	public void testNextCarriageWhenTrainHasNoCarriage()
+			throws TrainException{
+		DepartingTrain departingTrain = new DepartingTrain();
+		
+		RollingStock carriage = departingTrain.nextCarriage();
 
+		assertTrue("Carriage is not null", carriage==null);
+	}
+	
+	
+	/**
+	 * Creates a trains and adds a locomotive only.
+	 * Then calls nextCarriage and expect the result to be
+	 * the locomotive
+	 * 
+	 * @throws TrainException
+	 */
+	@Test
+	public void testNextCarriageWhenTrainHasOnlyLocomotive()
+			throws TrainException{
+		DepartingTrain departingTrain = new DepartingTrain();
+		
+		departingTrain.addCarriage(new Locomotive(GROSS_WEIGHT, VALID_CLASSIFICATION));
+		
+		RollingStock carriage = departingTrain.nextCarriage();
+
+		assertTrue("Carriage is not null", carriage instanceof Locomotive);
+	}
+	
+	/**
+	 * Creates a train and adds a locomotive and a carriage (PassengerCar).
+	 * Then calls firstCarriage to return the locomotive and calls nextCarriage 
+	 * immediatelly after. Expect PassengerCar to be returned. 
+	 * 
+	 * @throws TrainException
+	 */
+	@Test
+	public void testNextCarriageWhenTrainHasLocomotiveAndCarriages()
+			throws TrainException{
+		DepartingTrain departingTrain = new DepartingTrain();
+		
+		departingTrain.addCarriage(new Locomotive(GROSS_WEIGHT, VALID_CLASSIFICATION));
+		
+		departingTrain.addCarriage(new PassengerCar(GROSS_WEIGHT, PASSENGERCAR_SEAT_CAPACITY));
+		
+		departingTrain.firstCarriage();
+		
+		RollingStock carriage = departingTrain.nextCarriage();
+
+		assertTrue("Carriage is not null", carriage instanceof PassengerCar);
+	}
+
+	/**
+	 * Creates a train and adds 3 passenger cars, then adds a locomotive and starts
+	 * traversing using nextCarriage method.
+	 * Expected to return 4 rolling stocks starting with locomotive.
+	 * 
+	 * @throws TrainException
+	 */
+	@Test
+	public void testTraverseTrainUsingNextCarriage()
+			throws TrainException{
+		int carriageCount = 0;
+		
+		DepartingTrain departingTrain = new DepartingTrain();		
+		
+		departingTrain.addCarriage(new PassengerCar(GROSS_WEIGHT, PASSENGERCAR_SEAT_CAPACITY));
+		
+		departingTrain.addCarriage(new PassengerCar(GROSS_WEIGHT, PASSENGERCAR_SEAT_CAPACITY));
+		
+		departingTrain.addCarriage(new PassengerCar(GROSS_WEIGHT, PASSENGERCAR_SEAT_CAPACITY));
+		
+		departingTrain.addCarriage(new Locomotive(GROSS_WEIGHT, VALID_CLASSIFICATION));
+				
+		RollingStock rollingStock = departingTrain.nextCarriage();
+		
+		assertTrue("first carriage is not locomotive", rollingStock instanceof Locomotive);
+		carriageCount++;
+		
+		while ((rollingStock = departingTrain.nextCarriage()) != null){			
+			assertTrue("carriage is not passenger car", rollingStock instanceof PassengerCar);
+			carriageCount++;
+		}
+
+		assertTrue("Next Carriage has not traverse the whole train", carriageCount==4);
+	}
 }

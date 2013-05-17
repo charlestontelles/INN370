@@ -6,9 +6,13 @@ import org.junit.Test;
 
 import asgn2Exceptions.TrainException;
 import asgn2RollingStock.FreightCar;
-import asgn2RollingStock.Locomotive;
 
-
+/**
+ * Test cases for FreighCar class.
+ * 
+ * @author Phurpa
+ *
+ */
 public class FreightCarTest {
 
 	private static final int NEGATIVE_GROSS_WEIGHT = -1;
