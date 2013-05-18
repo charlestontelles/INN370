@@ -41,7 +41,7 @@ public class PassengerCarPanel extends JPanel {
 	private JSpinner spnWeight;
 
 	/**
-	 * panel 
+	 * panel located at the bottom
 	 */
 	private JPanel passengerPnl;
 	/**
