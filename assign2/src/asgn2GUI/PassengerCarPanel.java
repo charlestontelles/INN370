@@ -1,6 +1,12 @@
 package asgn2GUI;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
+import java.awt.Container;
+import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionListener;
 
@@ -16,7 +22,7 @@ import javax.swing.JSpinner;
  * 
  */
 public class PassengerCarPanel extends JPanel {
-	
+
 	/**
 	 * Mandatory class ID to be used by serialisation
 	 */
@@ -35,6 +41,10 @@ public class PassengerCarPanel extends JPanel {
 	private JSpinner spnWeight;
 
 	/**
+	 * panel 
+	 */
+	private JPanel passengerPnl;
+	/**
 	 * Panel constructor receives a external listener to be added as observer
 	 * 
 	 * @param actionListener
@@ -51,28 +61,73 @@ public class PassengerCarPanel extends JPanel {
 	 * TODO: CONVERT TO GRIDBAGLAYOUT
 	 */
 	public void initComponents() {
-		this.setLayout(new GridLayout(4, 2));
-		this.setBackground(Color.LIGHT_GRAY);
-		
-		JLabel panelTitle = new JLabel("Passenger Car");
+
+		setLayout(new GridLayout());
+		setBackground(Color.LIGHT_GRAY);
+
+		JLabel panelTitle = new JLabel("Passenger Car Panel");
 		JLabel lblEmpty = new JLabel("");
-		JLabel lblSeats = new JLabel("Seats:");
-		JLabel lblWeight = new JLabel("Weight:");
-		
+		JLabel lblSeats = new JLabel("Seats Capacity:");
+		JLabel lblWeight = new JLabel("Gross Weight:");
+
 		spnWeight = new JSpinner();
-		spnSeats = new JSpinner();
+		spnSeats  = new JSpinner();
+		btnAdd    = new JButton("Add");
+
+		panelTitle.setFont(new Font("Arial", Font.ROMAN_BASELINE, 14));
+		panelTitle.setForeground(Color.BLUE);
 		
-		btnAdd = new JButton("Add");
+		GridBagLayout layout = new GridBagLayout();
+		GridBagConstraints constraints = new GridBagConstraints(); 
+		constraints.fill = GridBagConstraints.HORIZONTAL;
 		
-		this.add(panelTitle);
+		passengerPnl = new JPanel(layout);
+		add(passengerPnl, BorderLayout.SOUTH);
+	    passengerPnl.setBackground(Color.LIGHT_GRAY);
+		
+	    addToPanel(passengerPnl, panelTitle,constraints,0,0,7,7);
+		addToPanel(passengerPnl, lblEmpty,constraints,0,0,7,7);
+		addToPanel(passengerPnl, lblWeight,constraints,10,10,7,7);
+		addToPanel(passengerPnl, spnWeight,constraints,11,10,20,10);
+		addToPanel(passengerPnl, lblSeats,constraints,10,11,7,7);
+		addToPanel(passengerPnl, spnSeats,constraints,11,11,10,10);
+		addToPanel(passengerPnl, btnAdd,constraints,12,11,5,5);
+		repaint();
+
+/*		this.add(panelTitle);
 		this.add(lblEmpty);
 		this.add(lblWeight);
 		this.add(spnWeight);
 		this.add(lblSeats);
 		this.add(spnSeats);
 		this.add(btnAdd);
+	*/	 
 	}
-	
+
+
+
+
+	/**
+	 * 
+	 * A convenience method to add a component to given grid bag
+	 * layout locations. 
+	 *
+	 * @param c the component to add
+	 * @param constraints the grid bag constraints to use
+	 * @param x the x grid position
+	 * @param y the y grid position
+	 * @param w the grid width
+	 * @param h the grid height
+	 */
+	private void addToPanel(JPanel jp,Component c, GridBagConstraints constraints, int x, int y, int w, int h) {  
+		constraints.gridx = x;
+		constraints.gridy = y;
+		constraints.ipadx = w;
+		constraints.ipady = h;
+		jp.add(c, constraints);
+	}
+
+
 	/**
 	 * Getter for Number of seats parameter
 	 * 
