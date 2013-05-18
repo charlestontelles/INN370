@@ -226,4 +226,35 @@ public class DepartingTrainTest {
 
 		assertTrue("Next Carriage has not traverse the whole train", carriageCount==4);
 	}
+	
+	/**
+	 * Test case for the Carriage which cannot be removed if there
+	 * is already passenger on it. If attempted to remove then it is expected to
+	 * throws TrainException
+	 *
+	 * @throws TrainException
+	 */
+	@Test (expected = TrainException.class)
+	public void testCannotRemoveCarriageIfPassengerExist() throws TrainException{
+		DepartingTrain departingTrain = new DepartingTrain();
+		departingTrain.addCarriage(new PassengerCar(GROSS_WEIGHT, PASSENGERCAR_SEAT_CAPACITY));
+		departingTrain.board(NUMBER_OF_PASSENGER_TO_BOARD);
+		
+		departingTrain.removeCarriage();	
+	}
+	
+	/**
+	 * Cannot remove empty carriage.In other words if there is no
+	 * rolling stock on the "train" and attempt to remove it. Then it is expected
+	 * to throw exception message
+	 * 
+	 * @throws TrainException
+	 */
+	@Test 
+	public void testCannotRemoveCarriageIfNull() throws TrainException{
+		DepartingTrain departingTrain = new DepartingTrain();
+		RollingStock firstCarriage = departingTrain.firstCarriage();
+		assertTrue("There is no Rolling Stock in the train", firstCarriage == null);
+	}
+
 }
