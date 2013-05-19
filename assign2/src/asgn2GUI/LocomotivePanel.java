@@ -1,12 +1,10 @@
 package asgn2GUI;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.GridLayout;
 import java.awt.event.ActionListener;
 import java.util.Enumeration;
 
@@ -48,11 +46,6 @@ public class LocomotivePanel extends JPanel {
 	private JSpinner spnWeight;
 
 	/**
-	 * Locomotive panel, place at the west
-	 */
-	private JPanel locomotivePnl;
-	
-	/**
 	 * Panel constructor receives a external listener to be added as observer
 	 * 
 	 * @param actionListener
@@ -70,7 +63,7 @@ public class LocomotivePanel extends JPanel {
 	 * locomotivePnl panel is added on the WEST to display the locomotive control
 	 */
 	public void initComponents() {
-		setLayout(new GridLayout());
+		setLayout(new GridBagLayout());
 		setBackground(Color.LIGHT_GRAY);
 
 		JLabel panelTitle = new JLabel("Locomotive");
@@ -94,41 +87,23 @@ public class LocomotivePanel extends JPanel {
 		spnWeight = new JSpinner();
 		spnPowerClass = new JSpinner();
 
-		/*
-		this.add(panelTitle);
-		this.add(lblType);
-		this.add(eletricButton);
-		this.add(dieselButton);
-		this.add(steamButton);
-		this.add(lblWeight);
-		this.add(spnWeight);
-		this.add(lblPowerClass);
-		this.add(spnPowerClass);
-		this.add(btnAdd);
-		*/
-		panelTitle.setFont(new Font("Arial", Font.ROMAN_BASELINE, 14));
-		panelTitle.setForeground(Color.BLUE);
+		panelTitle.setFont(new Font("Arial", Font.BOLD, 14));
+		panelTitle.setForeground(Color.BLACK);
 		
-		GridBagLayout layout = new GridBagLayout();
 		GridBagConstraints constraints = new GridBagConstraints(); 
-		
 		constraints.fill = GridBagConstraints.NONE;
-		locomotivePnl = new JPanel(layout);
-		locomotivePnl.setBackground(Color.LIGHT_GRAY);
-		add(locomotivePnl, BorderLayout.WEST);
-		
-	    addToPanel(locomotivePnl, panelTitle,constraints,0,10,17,17);
-		addToPanel(locomotivePnl, lblType,constraints,0,12,17,17);
-		addToPanel(locomotivePnl, eletricButton,constraints,0,13,17,17);
-		addToPanel(locomotivePnl, dieselButton,constraints,0,14,17,17);
-		addToPanel(locomotivePnl, steamButton,constraints,0,15,17,17);
-		addToPanel(locomotivePnl, lblWeight,constraints,0,16,20,10);
-		addToPanel(locomotivePnl, spnWeight,constraints,1,16,20,10);
-		addToPanel(locomotivePnl, lblPowerClass,constraints,0,17,20,10);
-		addToPanel(locomotivePnl, spnPowerClass,constraints,1,17,20,10);
-		addToPanel(locomotivePnl, btnAdd,constraints,0,18,20,10);
-		//repaint();
-		
+
+	    addToPanel(this, panelTitle,constraints,0,10,17,17);
+		addToPanel(this, lblType,constraints,0,12,17,17);
+		addToPanel(this, eletricButton,constraints,0,13,17,17);
+		addToPanel(this, dieselButton,constraints,0,14,17,17);
+		addToPanel(this, steamButton,constraints,0,15,17,17);
+		addToPanel(this, lblWeight,constraints,0,16,20,10);
+		addToPanel(this, spnWeight,constraints,1,16,20,10);
+		addToPanel(this, lblPowerClass,constraints,0,17,20,10);
+		addToPanel(this, spnPowerClass,constraints,1,17,20,10);
+		addToPanel(this, btnAdd,constraints,0,18,20,10);
+
 	}
 	
 	/**

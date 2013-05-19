@@ -1,12 +1,10 @@
 package asgn2GUI;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.GridLayout;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
@@ -47,10 +45,6 @@ public class BoardingTrainPanel extends JPanel {
 	 */
 	private JSpinner spnPassengers;
 	/**
-	 * Boarding panel, place at the NORTH
-	 */
-	private JPanel boardingtPnl;
-	/**
 	 * The text boxes below are use to show information (read only)
 	 * related to a departing train.
 	 */
@@ -80,7 +74,7 @@ public class BoardingTrainPanel extends JPanel {
 	 * control
 	 */
 	public void initComponents() {
-		this.setLayout(new GridLayout()); //3,3
+		this.setLayout(new GridBagLayout()); //3,3
 		this.setBackground(Color.LIGHT_GRAY);
 
 		JLabel panelTitle = new JLabel("Departing Train");
@@ -125,32 +119,27 @@ public class BoardingTrainPanel extends JPanel {
 		this.add(btnRemoveCar);		
 		*/
 		
-		panelTitle.setFont(new Font("Arial", Font.ROMAN_BASELINE, 14));
-		panelTitle.setForeground(Color.BLUE);
+		panelTitle.setFont(new Font("Arial", Font.BOLD, 14));
+		panelTitle.setForeground(Color.BLACK);
 
-		GridBagLayout layout = new GridBagLayout();
 		GridBagConstraints constraints = new GridBagConstraints(); 
-		
 		constraints.fill = GridBagConstraints.HORIZONTAL;
-		boardingtPnl = new JPanel(layout);
-	    boardingtPnl.setBackground(Color.LIGHT_GRAY);
-		add(boardingtPnl, BorderLayout.NORTH);
 			
-		addToPanel(boardingtPnl, panelTitle,constraints,0,0,0,5);
-		addToPanel(boardingtPnl, lblNumberOfSeats,constraints,1,1,0,5);
-		addToPanel(boardingtPnl, txtPassengersOut,constraints,2,1,50,5);
-		addToPanel(boardingtPnl, lblCanMove,constraints,3,1,0,5);
-		addToPanel(boardingtPnl, txtTrainCanMove,constraints,4,1,50,5);
-		addToPanel(boardingtPnl, lblNumberOnBoard,constraints,1,3,0,5);
-		addToPanel(boardingtPnl, txtNumberOnBoard,constraints,2,3,50,5);
-		addToPanel(boardingtPnl, lblCapacity,constraints,3,3,0,15);
-		addToPanel(boardingtPnl, txtLocomotiveCapacity,constraints,4,3,50,5);
-		addToPanel(boardingtPnl, lblTotalWeight,constraints,1,4,0,5);
-		addToPanel(boardingtPnl, txtTotalWeight,constraints,2,4,50,5);
-		addToPanel(boardingtPnl, lblPassengers,constraints,3,4,0,5);
-		addToPanel(boardingtPnl, spnPassengers,constraints,4,4,50,5);
-		addToPanel(boardingtPnl, btnBoard,constraints,5,4,0,5);
-		addToPanel(boardingtPnl, btnRemoveCar,constraints,6,4,0,5);
+		addToPanel(this, panelTitle,constraints,0,0,0,5);
+		addToPanel(this, lblNumberOfSeats,constraints,1,1,0,5);
+		addToPanel(this, txtPassengersOut,constraints,2,1,50,5);
+		addToPanel(this, lblCanMove,constraints,3,1,0,5);
+		addToPanel(this, txtTrainCanMove,constraints,4,1,50,5);
+		addToPanel(this, lblNumberOnBoard,constraints,1,3,0,5);
+		addToPanel(this, txtNumberOnBoard,constraints,2,3,50,5);
+		addToPanel(this, lblCapacity,constraints,3,3,0,15);
+		addToPanel(this, txtLocomotiveCapacity,constraints,4,3,50,5);
+		addToPanel(this, lblTotalWeight,constraints,1,4,0,5);
+		addToPanel(this, txtTotalWeight,constraints,2,4,50,5);
+		addToPanel(this, lblPassengers,constraints,3,4,0,5);
+		addToPanel(this, spnPassengers,constraints,4,4,50,5);
+		addToPanel(this, btnBoard,constraints,5,4,0,5);
+		addToPanel(this, btnRemoveCar,constraints,6,4,0,5);
 			
 	}
 

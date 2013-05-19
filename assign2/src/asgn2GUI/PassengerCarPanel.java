@@ -1,12 +1,10 @@
 package asgn2GUI;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.GridLayout;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
@@ -38,11 +36,6 @@ public class PassengerCarPanel extends JPanel {
 	 * Text box (spinner) for PassengerCar's weight
 	 */
 	private JSpinner spnWeight;
-
-	/**
-	 * passenger panel, place at the SOUTH
-	 */
-	private JPanel passengerPnl;
 	/**
 	 * Panel constructor receives a external listener to be added as observer
 	 * 
@@ -60,8 +53,7 @@ public class PassengerCarPanel extends JPanel {
 	 * passengerPnl panel is added on the SOUTH to display the passengerCar control
 	 */
 	public void initComponents() {
-
-		setLayout(new GridLayout());
+		setLayout(new GridBagLayout());
 		setBackground(Color.LIGHT_GRAY);
 
 		JLabel panelTitle = new JLabel("Passenger Car");
@@ -73,34 +65,19 @@ public class PassengerCarPanel extends JPanel {
 		spnSeats  = new JSpinner();
 		btnAdd    = new JButton("Add");
 
-		panelTitle.setFont(new Font("Arial", Font.ROMAN_BASELINE, 14));
-		panelTitle.setForeground(Color.BLUE);
+		panelTitle.setFont(new Font("Arial", Font.BOLD, 14));
+		panelTitle.setForeground(Color.BLACK);
 		
-		GridBagLayout layout = new GridBagLayout();
 		GridBagConstraints constraints = new GridBagConstraints(); 
-		
 		constraints.fill = GridBagConstraints.HORIZONTAL;
-		passengerPnl = new JPanel(layout);
-	    passengerPnl.setBackground(Color.LIGHT_GRAY);
-		add(passengerPnl, BorderLayout.SOUTH);
 			
-	    addToPanel(passengerPnl, panelTitle,constraints,0,0,7,7);
-		addToPanel(passengerPnl, lblEmpty,constraints,0,0,7,7);
-		addToPanel(passengerPnl, lblWeight,constraints,10,10,7,7);
-		addToPanel(passengerPnl, spnWeight,constraints,11,10,20,10);
-		addToPanel(passengerPnl, lblSeats,constraints,10,11,7,7);
-		addToPanel(passengerPnl, spnSeats,constraints,11,11,10,10);
-		addToPanel(passengerPnl, btnAdd,constraints,12,11,5,5);
-		//repaint();
-		
-/*		this.add(panelTitle);
-		this.add(lblEmpty);
-		this.add(lblWeight);
-		this.add(spnWeight);
-		this.add(lblSeats);
-		this.add(spnSeats);
-		this.add(btnAdd);
-	*/	 
+	    addToPanel(this, panelTitle,constraints,0,0,7,7);
+		addToPanel(this, lblEmpty,constraints,0,0,7,7);
+		addToPanel(this, lblWeight,constraints,10,10,7,7);
+		addToPanel(this, spnWeight,constraints,11,10,20,10);
+		addToPanel(this, lblSeats,constraints,10,11,7,7);
+		addToPanel(this, spnSeats,constraints,11,11,10,10);
+		addToPanel(this, btnAdd,constraints,12,11,5,5);
 	}
 
 

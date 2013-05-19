@@ -57,7 +57,7 @@ public class AssembledTrainPanel extends JPanel {
 	 * 
 	 */
 	protected void paintComponent(java.awt.Graphics g) {
-		int imagesPerLine = 6;
+		int imagesPerLine = 5;
 		int i = 0;
 		java.awt.Graphics2D g2 = (java.awt.Graphics2D) g;
 		java.awt.Font font = new java.awt.Font("Arial", 1, 11);
