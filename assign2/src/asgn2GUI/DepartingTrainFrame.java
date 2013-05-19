@@ -5,6 +5,8 @@ import java.awt.Frame;
 import java.awt.HeadlessException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -58,6 +60,10 @@ public class DepartingTrainFrame extends JFrame implements ActionListener {
 	 * The departing train being configured
 	 */
 	private DepartingTrain departingTrain;
+	/**
+	 * sum up gross weight for each rolling stock
+	 */
+	private List<Integer>grossWeightList; 
 
 	/**
 	 * Default Constructor
@@ -70,6 +76,7 @@ public class DepartingTrainFrame extends JFrame implements ActionListener {
 	public DepartingTrainFrame(String title) throws HeadlessException {
 		super(title);
 		initComponents();
+		grossWeightList = new ArrayList<Integer>();
 	}
 
 	/**
@@ -142,6 +149,7 @@ public class DepartingTrainFrame extends JFrame implements ActionListener {
 		String engineType = panel.getEngineType();
 		departingTrain.addCarriage(new Locomotive(weight, powerClass
 				+ engineType));
+		grossWeightList.add(weight);
 	}
 
 	/**
@@ -159,6 +167,7 @@ public class DepartingTrainFrame extends JFrame implements ActionListener {
 		int weight = panel.getWeight();
 		int numberOfSeats = panel.getNumberOfSeats();
 		departingTrain.addCarriage(new PassengerCar(weight, numberOfSeats));
+		grossWeightList.add(weight);
 	}
 
 	/**
@@ -176,6 +185,7 @@ public class DepartingTrainFrame extends JFrame implements ActionListener {
 		int weight = panel.getWeight();
 		String goodsType = panel.getGoodsType();
 		departingTrain.addCarriage(new FreightCar(weight, goodsType));
+		grossWeightList.add(weight);
 	}
 
 	/**
@@ -193,6 +203,7 @@ public class DepartingTrainFrame extends JFrame implements ActionListener {
 
 		if (e.getActionCommand().equalsIgnoreCase("remove car")) {
 			departingTrain.removeCarriage();
+			grossWeightList.remove(grossWeightList.size()-1);
 		} else if (e.getActionCommand().equalsIgnoreCase("board")) {
 			panel.setPassengerOut(""
 					+ departingTrain.board(panel.getNumberOfPassenger()));
@@ -225,8 +236,21 @@ public class DepartingTrainFrame extends JFrame implements ActionListener {
 				+ ((Locomotive) locomotive).power() : "0");
 		boardingTrainPanel.setNumberOnBoard(departingTrain.numberOnBoard()
 				+ "/" + departingTrain.numberOfSeats());
+		boardingTrainPanel.setTotalWeight(""+getTotalGrossWeight());
 	}
 
+	/**
+	 * calculated the total gross weight
+	 * 
+	 * @return total gross weight
+	 */
+	private int getTotalGrossWeight(){
+		int totalWeight = 0;
+		for (Integer weight : grossWeightList)
+			totalWeight += weight;
+		return totalWeight;
+	}
+		
 	/**
 	 * Main method used to initialise a Departing Train application
 	 * 

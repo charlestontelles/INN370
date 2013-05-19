@@ -182,6 +182,15 @@ public class BoardingTrainPanel extends JPanel {
 	}
 	
 	/**
+	 * Setter for total gross weight information.
+	 * 
+	 * @param totalWeightMsg total gross weight
+	 */
+	public void setTotalWeight(String totalWeightMsg){
+		txtTotalWeight.setText(totalWeightMsg);
+	}
+	
+	/**
 	 * Setter for Number of passengers already boarded
 	 * 
 	 * @param numberOnBoardMsg number of passengers boarded
