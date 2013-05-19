@@ -1,6 +1,11 @@
 package asgn2GUI;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
+import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionListener;
 
@@ -42,6 +47,10 @@ public class BoardingTrainPanel extends JPanel {
 	 */
 	private JSpinner spnPassengers;
 	/**
+	 * Boarding panel, place at the NORTH
+	 */
+	private JPanel boardingtPnl;
+	/**
 	 * The text boxes below are use to show information (read only)
 	 * related to a departing train.
 	 */
@@ -66,19 +75,19 @@ public class BoardingTrainPanel extends JPanel {
 	/**
 	 * Set the panel layout and arrange the components within the panel
 	 * 
-	 * TODO: CONVERT TO GRIDBAGLAYOUT
+	 * boardingtPnl panel is added on the NORTH to display the DepartingTrain
+	 * control
 	 */
 	public void initComponents() {
-		this.setLayout(new GridLayout(3, 4));
+		this.setLayout(new GridLayout());
 		this.setBackground(Color.LIGHT_GRAY);
 
-		//JLabel panelTitle = new JLabel("Departing Train");
-		//JLabel lblEmpty = new JLabel("");
+		JLabel panelTitle = new JLabel("Departing Train");
 		JLabel lblPassengers = new JLabel("Passengers:");
 		JLabel lblNumberOfSeats = new JLabel("Passengers out:");
 		JLabel lblNumberOnBoard = new JLabel("Number On Board:");
-		JLabel lblCapacity = new JLabel("Capacity:");
-		JLabel lblCanMove = new JLabel("Train Can move?");
+		JLabel lblCapacity = new JLabel("  Capacity:");
+		JLabel lblCanMove = new JLabel("  Train Can move?");
 
 		spnPassengers = new JSpinner();
 
@@ -96,6 +105,7 @@ public class BoardingTrainPanel extends JPanel {
 		txtTrainCanMove = new JTextField();
 		txtTrainCanMove.setEditable(false);
 
+		/*
 		this.add(lblNumberOfSeats);
 		this.add(txtPassengersOut);
 		this.add(lblCanMove);
@@ -109,8 +119,54 @@ public class BoardingTrainPanel extends JPanel {
 		this.add(spnPassengers);
 		this.add(btnBoard);
 		this.add(btnRemoveCar);		
+		*/
+		
+		panelTitle.setFont(new Font("Arial", Font.ROMAN_BASELINE, 14));
+		panelTitle.setForeground(Color.BLUE);
+
+		GridBagLayout layout = new GridBagLayout();
+		GridBagConstraints constraints = new GridBagConstraints(); 
+		
+		constraints.fill = GridBagConstraints.HORIZONTAL;
+		boardingtPnl = new JPanel(layout);
+	    boardingtPnl.setBackground(Color.LIGHT_GRAY);
+		add(boardingtPnl, BorderLayout.NORTH);
+			
+		addToPanel(boardingtPnl, panelTitle,constraints,0,0,0,5);
+		addToPanel(boardingtPnl, lblNumberOfSeats,constraints,1,1,0,5);
+		addToPanel(boardingtPnl, txtPassengersOut,constraints,2,1,50,5);
+		addToPanel(boardingtPnl, lblCanMove,constraints,3,1,0,5);
+		addToPanel(boardingtPnl, txtTrainCanMove,constraints,4,1,50,5);
+		addToPanel(boardingtPnl, lblNumberOnBoard,constraints,1,3,0,5);
+		addToPanel(boardingtPnl, txtNumberOnBoard,constraints,2,3,50,5);
+		addToPanel(boardingtPnl, lblCapacity,constraints,3,3,0,15);
+		addToPanel(boardingtPnl, txtLocomotiveCapacity,constraints,4,3,50,5);
+		addToPanel(boardingtPnl, lblPassengers,constraints,1,4,0,5);
+		addToPanel(boardingtPnl, spnPassengers,constraints,2,4,50,5);
+		addToPanel(boardingtPnl, btnBoard,constraints,3,4,0,5);
+		addToPanel(boardingtPnl, btnRemoveCar,constraints,4,4,50,5);
+				
 	}
 
+	/**
+	 * 
+	 * A convenience method to add a component to given grid bag
+	 * layout locations. 
+	 *
+	 * @param c the component to add
+	 * @param constraints the grid bag constraints to use
+	 * @param x the x grid position
+	 * @param y the y grid position
+	 * @param w the grid internal padding width
+	 * @param h the grid internal padding height
+	 */
+	private void addToPanel(JPanel jp,Component c, GridBagConstraints constraints, int x, int y, int w, int h) {  
+		constraints.gridx = x;
+		constraints.gridy = y;
+		constraints.ipadx = w;
+		constraints.ipady = h;
+		jp.add(c, constraints);
+	}
 	/**
 	 * Getter for Number Of Passenger
 	 * 

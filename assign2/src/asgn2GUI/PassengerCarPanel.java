@@ -3,7 +3,6 @@ package asgn2GUI;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
-import java.awt.Container;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -41,7 +40,7 @@ public class PassengerCarPanel extends JPanel {
 	private JSpinner spnWeight;
 
 	/**
-	 * panel located at the bottom
+	 * passenger panel, place at the SOUTH
 	 */
 	private JPanel passengerPnl;
 	/**
@@ -58,14 +57,14 @@ public class PassengerCarPanel extends JPanel {
 	/**
 	 * Set the panel layout and arrange the components within the panel
 	 * 
-	 * TODO: CONVERT TO GRIDBAGLAYOUT
+	 * passengerPnl panel is added on the SOUTH to display the passengerCar control
 	 */
 	public void initComponents() {
 
 		setLayout(new GridLayout());
 		setBackground(Color.LIGHT_GRAY);
 
-		JLabel panelTitle = new JLabel("Passenger Car Panel");
+		JLabel panelTitle = new JLabel("Passenger Car");
 		JLabel lblEmpty = new JLabel("");
 		JLabel lblSeats = new JLabel("Seats Capacity:");
 		JLabel lblWeight = new JLabel("Gross Weight:");
@@ -79,12 +78,12 @@ public class PassengerCarPanel extends JPanel {
 		
 		GridBagLayout layout = new GridBagLayout();
 		GridBagConstraints constraints = new GridBagConstraints(); 
+		
 		constraints.fill = GridBagConstraints.HORIZONTAL;
-		
 		passengerPnl = new JPanel(layout);
-		add(passengerPnl, BorderLayout.SOUTH);
 	    passengerPnl.setBackground(Color.LIGHT_GRAY);
-		
+		add(passengerPnl, BorderLayout.SOUTH);
+			
 	    addToPanel(passengerPnl, panelTitle,constraints,0,0,7,7);
 		addToPanel(passengerPnl, lblEmpty,constraints,0,0,7,7);
 		addToPanel(passengerPnl, lblWeight,constraints,10,10,7,7);
@@ -92,8 +91,8 @@ public class PassengerCarPanel extends JPanel {
 		addToPanel(passengerPnl, lblSeats,constraints,10,11,7,7);
 		addToPanel(passengerPnl, spnSeats,constraints,11,11,10,10);
 		addToPanel(passengerPnl, btnAdd,constraints,12,11,5,5);
-		repaint();
-
+		//repaint();
+		
 /*		this.add(panelTitle);
 		this.add(lblEmpty);
 		this.add(lblWeight);
