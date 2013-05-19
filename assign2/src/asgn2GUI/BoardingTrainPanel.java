@@ -58,6 +58,7 @@ public class BoardingTrainPanel extends JPanel {
 	private JTextField txtNumberOnBoard;
 	private JTextField txtLocomotiveCapacity;
 	private JTextField txtTrainCanMove;
+	private JTextField txtTotalWeight;
 
 	/**
 	 * Panel constructor receives a external listener to be added as observer
@@ -79,16 +80,17 @@ public class BoardingTrainPanel extends JPanel {
 	 * control
 	 */
 	public void initComponents() {
-		this.setLayout(new GridLayout());
+		this.setLayout(new GridLayout()); //3,3
 		this.setBackground(Color.LIGHT_GRAY);
 
 		JLabel panelTitle = new JLabel("Departing Train");
 		JLabel lblPassengers = new JLabel("Passengers:");
 		JLabel lblNumberOfSeats = new JLabel("Passengers out:");
 		JLabel lblNumberOnBoard = new JLabel("Number On Board:");
-		JLabel lblCapacity = new JLabel("  Capacity:");
+		JLabel lblCapacity = new JLabel(" Pulling Power:");
 		JLabel lblCanMove = new JLabel("  Train Can move?");
-
+		JLabel lblTotalWeight = new JLabel("Total Gross Weight:");
+		
 		spnPassengers = new JSpinner();
 
 		btnBoard = new JButton("Board");
@@ -104,7 +106,9 @@ public class BoardingTrainPanel extends JPanel {
 		txtLocomotiveCapacity.setEditable(false);
 		txtTrainCanMove = new JTextField();
 		txtTrainCanMove.setEditable(false);
-
+		txtTotalWeight = new JTextField();
+		txtTotalWeight.setEditable(false);
+		
 		/*
 		this.add(lblNumberOfSeats);
 		this.add(txtPassengersOut);
@@ -141,11 +145,13 @@ public class BoardingTrainPanel extends JPanel {
 		addToPanel(boardingtPnl, txtNumberOnBoard,constraints,2,3,50,5);
 		addToPanel(boardingtPnl, lblCapacity,constraints,3,3,0,15);
 		addToPanel(boardingtPnl, txtLocomotiveCapacity,constraints,4,3,50,5);
-		addToPanel(boardingtPnl, lblPassengers,constraints,1,4,0,5);
-		addToPanel(boardingtPnl, spnPassengers,constraints,2,4,50,5);
-		addToPanel(boardingtPnl, btnBoard,constraints,3,4,0,5);
-		addToPanel(boardingtPnl, btnRemoveCar,constraints,4,4,50,5);
-				
+		addToPanel(boardingtPnl, lblTotalWeight,constraints,1,4,0,5);
+		addToPanel(boardingtPnl, txtTotalWeight,constraints,2,4,50,5);
+		addToPanel(boardingtPnl, lblPassengers,constraints,3,4,0,5);
+		addToPanel(boardingtPnl, spnPassengers,constraints,4,4,50,5);
+		addToPanel(boardingtPnl, btnBoard,constraints,5,4,0,5);
+		addToPanel(boardingtPnl, btnRemoveCar,constraints,6,4,0,5);
+			
 	}
 
 	/**
@@ -199,10 +205,10 @@ public class BoardingTrainPanel extends JPanel {
 	 * Setter for locomotive's capacity
 	 * 
 	 * @param locomotiveCapacityMsg total capacity of locomotive considering
-	 * all carriages including itself.
+	 * all carriages including itself in tonnes
 	 */
 	public void setLocomotiveCapacity(String locomotiveCapacityMsg){
-		txtLocomotiveCapacity.setText(locomotiveCapacityMsg);
+		txtLocomotiveCapacity.setText(locomotiveCapacityMsg + " Tonnes");
 	}
 	
 	/**
