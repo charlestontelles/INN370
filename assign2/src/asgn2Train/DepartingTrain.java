@@ -283,7 +283,7 @@ public class DepartingTrain {
 			return false;
 		if (carriages.size() == 0)
 			return true;
-		return locomotive.power() > getTotalWeigth();
+		return locomotive.power() >= getTotalWeigth();
 	}
 
 	/**
