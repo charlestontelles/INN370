@@ -64,11 +64,11 @@ public class FreightCarPanel extends JPanel {
 		JLabel lblType = new JLabel("Kind of Goods:");
 		JLabel lblWeight = new JLabel("Gross Weight:");
 
-		JRadioButton generalButton = new JRadioButton("General-G");
+		JRadioButton generalButton = new JRadioButton("[G]-General");
 		generalButton.setBackground(Color.LIGHT_GRAY);
-		JRadioButton refrigeratedButton = new JRadioButton("Refrigerated-R");
+		JRadioButton refrigeratedButton = new JRadioButton("[R]-Refrigerated");
 		refrigeratedButton.setBackground(Color.LIGHT_GRAY);
-		JRadioButton dangerousButton = new JRadioButton("Dangerous-D");
+		JRadioButton dangerousButton = new JRadioButton("[D]-Dangerous");
 		dangerousButton.setBackground(Color.LIGHT_GRAY);
 
 		checkBoxGoodsType = new ButtonGroup();
@@ -129,7 +129,7 @@ public class FreightCarPanel extends JPanel {
 			AbstractButton button = buttons.nextElement();
 
 			if (button.isSelected()) {
-				return button.getText().substring(0, 1);
+				return button.getText().substring(1, 2);
 			}
 		}
 		return "";

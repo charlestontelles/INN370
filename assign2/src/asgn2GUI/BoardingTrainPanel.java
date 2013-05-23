@@ -83,7 +83,7 @@ public class BoardingTrainPanel extends JPanel {
 		JLabel lblNumberOnBoard = new JLabel("Number On Board:");
 		JLabel lblCapacity = new JLabel(" Pulling Power:");
 		JLabel lblCanMove = new JLabel("  Train Can move?");
-		JLabel lblTotalWeight = new JLabel("Total Gross Weight:");
+		JLabel lblTotalWeight = new JLabel("Total Gross Weight (Tonnes):");
 		
 		spnPassengers = new JSpinner();
 
@@ -178,7 +178,13 @@ public class BoardingTrainPanel extends JPanel {
 	 * @param passengersOutMsg number of passengers left out
 	 */
 	public void setPassengerOut(String passengersOutMsg){
-		txtPassengersOut.setText(passengersOutMsg);
+		if(new Integer(passengersOutMsg) > 0){
+			txtPassengersOut.setText(passengersOutMsg);
+			txtPassengersOut.setBackground(Color.RED);
+		} else {
+			txtPassengersOut.setText(passengersOutMsg);
+			txtPassengersOut.setBackground(Color.GREEN);
+		}
 	}
 	
 	/**

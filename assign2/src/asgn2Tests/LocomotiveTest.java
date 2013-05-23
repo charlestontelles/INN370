@@ -40,7 +40,7 @@ public class LocomotiveTest {
 	 * 
 	 * @throws TrainException
 	 */
-	@Test
+	@Test (expected = TrainException.class)
 	public void testLocomotiveConstructorWithZeroGrossWeight() throws TrainException {
 		new Locomotive(ZERO_GROSSWEIGHT, VALID_CLASSIFICATION);
 	}

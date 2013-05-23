@@ -39,9 +39,12 @@ import asgn2Exceptions.TrainException;
  */
 public class Locomotive extends RollingStock {
 
-	private static final String INVALID_CLASSIFICATION = "Invalid Classification";
-
 	private String classification;
+
+	/**
+	 * Error message to be used by Train Exceptions.
+	 */
+	private static final String INVALID_CLASSIFICATION = "Invalid locomotived classification, expected Power Class [1-9] and engine type [D/E/S]";
 
 	/**
 	 * Constructs a new locomotive object with a fixed gross weight and
@@ -59,9 +62,8 @@ public class Locomotive extends RollingStock {
 	public Locomotive(Integer grossWeight, String classification)
 			throws TrainException {
 		super(grossWeight);
-		if (grossWeight < 0)
-			throw new TrainException(GROSS_WEIGTH_INVALID);
-		if (classification.length() != 2)
+		// uses regular expression to validate classification
+		if (!classification.matches("[1-9][DES]"))
 			throw new TrainException(INVALID_CLASSIFICATION);
 
 		this.classification = classification;

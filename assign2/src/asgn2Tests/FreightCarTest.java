@@ -36,14 +36,13 @@ public class FreightCarTest {
 	
 	/**
 	 * Create a new FreightCar with a zero gross weight.
-	 * Expected to return True.
+	 * Expected train exception.
 	 * 
 	 * @throws TrainException
 	 */
-	@Test 
+	@Test (expected = TrainException.class)
 	public void testFreightCarWithZeroWeight() throws TrainException {
 		FreightCar freightCar = new FreightCar(ZERO_GROSS_WEIGHT, VALID_GOOD_TYPE);
-	    assertTrue("Invalid gross Weight", freightCar.getGrossWeight() == ZERO_GROSS_WEIGHT);
 	}
 	
 	/**

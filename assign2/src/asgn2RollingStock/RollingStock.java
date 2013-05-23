@@ -15,9 +15,13 @@ import asgn2Exceptions.TrainException;
  */
 public abstract class RollingStock {
 
-	protected final static String GROSS_WEIGTH_INVALID = "Gross weight invalid";
-
 	private Integer grossWeight;
+	
+	/**
+	 * Error message to be used by Train Exceptions.
+	 */
+	protected final static String GROSS_WEIGTH_INVALID = "Gross weight must be positive";
+
 
 	/**
 	 * Constructs a railway carriage with a specific gross weight (i.e., the
@@ -39,7 +43,7 @@ public abstract class RollingStock {
 	 *             - if the gross weight is not positive
 	 */
 	public RollingStock(Integer grossWeight) throws TrainException {
-		if (grossWeight < 0)
+		if (grossWeight <= 0)
 			throw new TrainException(GROSS_WEIGTH_INVALID);
 		this.grossWeight = grossWeight;
 	}

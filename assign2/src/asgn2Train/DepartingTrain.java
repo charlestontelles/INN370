@@ -41,7 +41,7 @@ public class DepartingTrain {
 	 * For convenience the Locomotive object will be stored in a separate
 	 * variable rather than the carriages List
 	 */
-	private Locomotive locomotive;
+	// private Locomotive locomotive;
 
 	/**
 	 * Stores all carriages for a departing trains excluding the locomotive
@@ -58,6 +58,7 @@ public class DepartingTrain {
 	 * Error messages to be used by train Exception
 	 */
 	private static final String LOCOMOTIVE_ALREADY_EXISTS = "Locomotive already exists";
+	private static final String LOCOMOTIVE_MUST_BE_FIRST_CARRIAGE = "Locomotive must be the first carriage";
 	private static final String CANNOT_BE_ADDED_TRAIN_HAS_PASSENGER = "Carriage cannot be added because train has passengers onboard";
 	private static final String CANNOT_BE_REMOVED_TRAIN_HAS_PASSENGER = "Carriage cannot be removed because train has passengers onboard";
 	private static final String NO_ROLLING_STOCK_TO_REMOVED = "There is no Rolling Stock in the train";
@@ -72,7 +73,7 @@ public class DepartingTrain {
 	 */
 	public DepartingTrain() {
 		this.carriages = new ArrayList<RollingStock>();
-		this.carriagePointer = -1;
+		this.carriagePointer = 0;
 	}
 
 	/**
@@ -94,19 +95,23 @@ public class DepartingTrain {
 	public void addCarriage(RollingStock newCarriage) throws TrainException {
 		if (hasPassenger())
 			throw new TrainException(CANNOT_BE_ADDED_TRAIN_HAS_PASSENGER);
+		if (!(newCarriage instanceof Locomotive) && carriages.size() == 0)
+			throw new TrainException(LOCOMOTIVE_MUST_BE_FIRST_CARRIAGE);
 
 		if (newCarriage instanceof Locomotive) {
-			if (locomotive != null)
+			if (carriages.size() > 0 && carriages.get(0) instanceof Locomotive)
 				throw new TrainException(LOCOMOTIVE_ALREADY_EXISTS);
-			locomotive = (Locomotive) newCarriage;
-		} else if (newCarriage instanceof FreightCar) {
 			carriages.add(newCarriage);
-		} else if (newCarriage instanceof PassengerCar) {
-			if (carriages.size() >= 1
-					&& carriages.get(carriages.size() - 1) instanceof FreightCar)
-				throw new TrainException(
-						CANNOT_ADD_PASSENGERCAR_AFTER_FREIGHTCAR);
-			carriages.add(newCarriage);
+		} else {
+			if (newCarriage instanceof FreightCar) {
+				carriages.add(newCarriage);
+			} else if (newCarriage instanceof PassengerCar) {
+				if (carriages.size() > 1
+						&& carriages.get(carriages.size() - 1) instanceof FreightCar)
+					throw new TrainException(
+							CANNOT_ADD_PASSENGERCAR_AFTER_FREIGHTCAR);
+				carriages.add(newCarriage);
+			}
 		}
 	}
 
@@ -151,18 +156,8 @@ public class DepartingTrain {
 	 *         carriages
 	 */
 	public RollingStock firstCarriage() {
-		if (locomotive != null) {
-			carriagePointer = 0;
-			return locomotive;
-		} else {
-			if (carriages.size() > 0) {
-				carriagePointer = 1;
-				return carriages.get(0);
-			} else {
-				carriagePointer = 0;
-				return null;
-			}
-		}
+		carriagePointer = 0;
+		return carriages.size() == 0 ? null : carriages.get(carriagePointer++);
 	}
 
 	/**
@@ -181,11 +176,8 @@ public class DepartingTrain {
 	 *         nextCarriage, or null if there is no such carriage
 	 */
 	public RollingStock nextCarriage() {
-		if (carriagePointer++ == -1)
-			return locomotive;
-		else
-			return carriagePointer > carriages.size() ? null : carriages
-					.get(carriagePointer - 1);
+		return carriagePointer >= carriages.size() || carriages.size() == 0 ? null
+				: carriages.get(carriagePointer++);
 	}
 
 	/**
@@ -217,7 +209,6 @@ public class DepartingTrain {
 			if (rs instanceof PassengerCar) {
 				totalOnBoard += ((PassengerCar) rs).numberOnBoard();
 			}
-
 		}
 		return totalOnBoard;
 	}
@@ -232,14 +223,11 @@ public class DepartingTrain {
 	 *             passengers on the train.
 	 */
 	public void removeCarriage() throws TrainException {
-		if (locomotive == null && carriages.size() == 0)
+		if (carriages.size() == 0)
 			throw new TrainException(NO_ROLLING_STOCK_TO_REMOVED);
 		if (hasPassenger())
 			throw new TrainException(CANNOT_BE_REMOVED_TRAIN_HAS_PASSENGER);
-		if (carriages.size() == 0 && locomotive != null)
-			locomotive = null;
-		else
-			carriages.remove(carriages.size() - 1);
+		carriages.remove(carriages.size() - 1);
 	}
 
 	/**
@@ -259,10 +247,11 @@ public class DepartingTrain {
 	 */
 	public String toString() {
 		String trainString = "";
-		if (locomotive != null)
-			trainString += locomotive;
 		for (RollingStock rs : carriages) {
-			trainString += "-" + rs;
+			if (rs instanceof Locomotive)
+				trainString += rs;
+			else
+				trainString += "-" + rs;
 		}
 		return trainString;
 	}
@@ -275,15 +264,13 @@ public class DepartingTrain {
 	 * In the degenerate case of a "train" which doesn't have any rolling stock
 	 * at all yet, the method returns true.
 	 * 
-	 * @return boolean - true if the train can move (or contains no carriages), false
-	 *         otherwise
+	 * @return boolean - true if the train can move (or contains no carriages),
+	 *         false otherwise
 	 */
 	public boolean trainCanMove() {
-		if (locomotive == null)
-			return false;
 		if (carriages.size() == 0)
 			return true;
-		return locomotive.power() >= getTotalWeigth();
+		return ((Locomotive) carriages.get(0)).power() >= getTotalWeigth();
 	}
 
 	/**
@@ -310,8 +297,6 @@ public class DepartingTrain {
 	 */
 	private int getTotalWeigth() {
 		int totalWeight = 0;
-		if (locomotive != null)
-			totalWeight += locomotive.getGrossWeight();
 		for (RollingStock rs : carriages) {
 			totalWeight += rs.getGrossWeight();
 		}

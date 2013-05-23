@@ -15,8 +15,13 @@ import asgn2Exceptions.TrainException;
  */
 public class FreightCar extends RollingStock {
 
-	private static final String INVALID_GOODS_TYPE = "Invalid Goods Type, expected G/R/D";
 	private String goodsType;
+	
+	/**
+	 * Error message to be used by Train Exceptions.
+	 */
+	private static final String INVALID_GOODS_TYPE = "Invalid Goods Type, expected G/R/D";
+	
 
 	/**
 	 * Constructs a freight car object.
@@ -35,8 +40,6 @@ public class FreightCar extends RollingStock {
 	public FreightCar(Integer grossWeight, String goodsType)
 			throws TrainException {
 		super(grossWeight);
-		if (grossWeight < 0)
-			throw new TrainException(GROSS_WEIGTH_INVALID);
 		if (!goodsType.equals("G") && !goodsType.equals("R")
 				&& !goodsType.equals("D"))
 			throw new TrainException(INVALID_GOODS_TYPE);

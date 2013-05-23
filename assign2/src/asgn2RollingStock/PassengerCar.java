@@ -13,10 +13,17 @@ import asgn2Exceptions.TrainException;
  */
 public class PassengerCar extends RollingStock {
 
-	private final static String NUM_PASSENGERS_INVALID = "Number of Passengers invalid";
-	
 	private Integer numberOfSeats;
+	
 	private Integer passengerOnBoard;
+	
+	/**
+	 * Error messages to be used by Train Exceptions.
+	 */
+	private final static String NUM_PASSENGERS_CANNOT_BE_NEGATIVE = "Number of Passengers cannot be negative";
+	private final static String NUM_SEATS_CANNOT_BE_NEGATIVE = "Number of Seats cannot be negative";
+	private final static String CANNOT_ALIGHT_MORE_THAN_BOARDED = "Cannont alight more passengers than boarded";
+	
 
 	/**
 	 * Constructs a passenger car with a known weight and a fixed number of
@@ -37,10 +44,8 @@ public class PassengerCar extends RollingStock {
 	public PassengerCar(Integer grossWeight, Integer numberOfSeats)
 			throws TrainException {
 		super(grossWeight);
-		if (grossWeight < 0)
-			throw new TrainException(GROSS_WEIGTH_INVALID);
 		if (numberOfSeats < 0)
-			throw new TrainException(NUM_PASSENGERS_INVALID);
+			throw new TrainException(NUM_SEATS_CANNOT_BE_NEGATIVE);
 
 		this.numberOfSeats = numberOfSeats;
 		this.passengerOnBoard = 0;
@@ -58,9 +63,11 @@ public class PassengerCar extends RollingStock {
 	 *             number of departing passengers exceeds the number on board
 	 */
 	public void alight(Integer departingPassengers) throws TrainException {
-		if (departingPassengers < 0 || departingPassengers > passengerOnBoard)
-			throw new TrainException(NUM_PASSENGERS_INVALID);
-
+		if (departingPassengers < 0)
+			throw new TrainException(NUM_PASSENGERS_CANNOT_BE_NEGATIVE);
+		if(departingPassengers > passengerOnBoard)
+			throw new TrainException(CANNOT_ALIGHT_MORE_THAN_BOARDED);
+		
 		passengerOnBoard -= departingPassengers;
 	}
 
@@ -81,7 +88,7 @@ public class PassengerCar extends RollingStock {
 	public Integer board(Integer newPassengers) throws TrainException {
 		Integer unableToBoard = 0;
 		if (newPassengers < 0) {
-			throw new TrainException(NUM_PASSENGERS_INVALID);
+			throw new TrainException(NUM_PASSENGERS_CANNOT_BE_NEGATIVE);
 		}
 		if (numberOfSeats - passengerOnBoard >= newPassengers){
 			passengerOnBoard += newPassengers;

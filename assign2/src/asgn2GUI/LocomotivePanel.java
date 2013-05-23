@@ -71,11 +71,11 @@ public class LocomotivePanel extends JPanel {
 		JLabel lblWeight = new JLabel("Gross Weight:");
 		JLabel lblPowerClass = new JLabel("Power Class:");
 
-		JRadioButton eletricButton = new JRadioButton("Eletric");
+		JRadioButton eletricButton = new JRadioButton("[E]-Eletric");
 		eletricButton.setBackground(Color.LIGHT_GRAY);
-		JRadioButton dieselButton = new JRadioButton("Diesel");
+		JRadioButton dieselButton = new JRadioButton("[D]-Diesel");
 		dieselButton.setBackground(Color.LIGHT_GRAY);
-		JRadioButton steamButton = new JRadioButton("Steam");
+		JRadioButton steamButton = new JRadioButton("[S]-Steam");
 		steamButton.setBackground(Color.LIGHT_GRAY);
 
 		checkBoxEngineType = new ButtonGroup();
@@ -138,7 +138,7 @@ public class LocomotivePanel extends JPanel {
 			AbstractButton button = buttons.nextElement();
 
 			if (button.isSelected()) {
-				return button.getText().substring(0, 1);
+				return button.getText().substring(1, 2);
 			}
 		}
 		return "";
