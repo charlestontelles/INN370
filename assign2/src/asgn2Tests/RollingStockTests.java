@@ -1,10 +1,16 @@
 package asgn2Tests;
 
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
 import org.junit.Test;
 
 import asgn2Exceptions.TrainException;
+import asgn2RollingStock.FreightCar;
 import asgn2RollingStock.Locomotive;
 import asgn2RollingStock.PassengerCar;
+import asgn2RollingStock.RollingStock;
+import asgn2Train.DepartingTrain;
 
 
 /**
@@ -22,8 +28,18 @@ public class RollingStockTests {
 	private static final int VALID_NUMBER_PASSENGERS = 10;
 	private static final int NEGATIVE_NUMBER_PASSENGERS = -1;
 	private static final String VALID_CLASSIFICATION = "4D";
-	private static final String INVALID_LOCOMOTIVE_POWER = "0D";
-	private static final String INVALID_LOCOMOTIVE_TYPE = "4Z";
+	private static final String INVALID_LOCOMOTIVE_CODE = "4Z";
+	private static final String VALID_GOOD_TYPE = "G"; //G,R OR D
+	private static final String INVALID_GOOD_TYPE = "A";
+	private static final int NUMBER_OF_PASSENGER_TO_BOARD = 70;
+	private static final int NUMBER_OF_PASSENGER_TO_DEPART = 70;
+	private static final int NEGATIVE_NUMBER_OF_PASSENGER_TO_DEPART = -1;
+	private static final int NUMBER_OF_PASSENGER_TO_BOARD2 = 30; //A 
+	private static final int NUMBER_OF_PASSENGER_TO_ALIGHT = 5; //B
+	private static final int PESSENGER_ON_BOARD = 25; //Difference of A-B
+	private static final int SEATS_CAPACITY = 50;
+	private static final int NEGATIVE_SEATS_CAPACITY = -1;
+	
 	
 	/**
 	 * Try to create a new Locomotive with negative gross weight.
@@ -32,7 +48,7 @@ public class RollingStockTests {
 	 * @throws TrainException
 	 */
 	@Test (expected = TrainException.class)
-	public void testNegativeGrossWeightNotAllowed() throws TrainException{
+	public void NegativeGrossWeightInLocomotiveIsDisallowed() throws TrainException{
 		Locomotive locomotive = new Locomotive(NEGATIVE_GROSS_WEIGHT, VALID_CLASSIFICATION);
 	}
 	
@@ -43,7 +59,7 @@ public class RollingStockTests {
 	 * @throws TrainException
 	 */
 	@Test (expected = TrainException.class)
-	public void testZeroGrossWeightNotAllowed() throws TrainException{
+	public void ZeroGrossWeightInLocomotiveIsDisallowed() throws TrainException{
 		Locomotive locomotive = new Locomotive(ZERO_GROSS_WEIGHT, VALID_CLASSIFICATION);
 	}
 	
@@ -54,20 +70,44 @@ public class RollingStockTests {
 	 * @throws TrainException
 	 */
 	@Test (expected = TrainException.class)
-	public void testInvalidLocomotivePower() throws TrainException{
-		Locomotive locomotive = new Locomotive(ZERO_GROSS_WEIGHT, INVALID_LOCOMOTIVE_POWER);
+	public void ZeroPullingPowerIsDisallowed() throws TrainException{
+		Locomotive locomotive = new Locomotive(ZERO_GROSS_WEIGHT, VALID_CLASSIFICATION);
 	}
 	
 	/**
-	 * Try to create a new Locomotive with a type different of D/E/S.
-	 * Expected Train exception.
+	 * Try to create a new Locomotive with a type other than D/E/S.It is 
+	 * Expected to throw Train exception.
 	 * 
 	 * @throws TrainException
 	 */
 	@Test (expected = TrainException.class)
-	public void testInvalidLocomotiveType() throws TrainException{
-		Locomotive locomotive = new Locomotive(ZERO_GROSS_WEIGHT, INVALID_LOCOMOTIVE_TYPE);
+	public void InvalidLocomotiveTypeDetected() throws TrainException{
+		Locomotive locomotive = new Locomotive(VALID_GROSS_WEIGHT, INVALID_LOCOMOTIVE_CODE);
 	}
+	
+	/**
+	 * Test to perform that locomotive pulling power by adding 
+	 * one locomotive, three passenger car and freight car with 
+	 * VALID_GROSS_WEIGHT=100 tonnes. It is expected to return false
+	 * 
+	 */
+	@Test 
+	public void LocomotivePowerTooLow() throws TrainException{
+		
+		DepartingTrain deptTrain = new DepartingTrain();
+		
+		deptTrain.addCarriage(new Locomotive(VALID_GROSS_WEIGHT, VALID_CLASSIFICATION));
+		
+		deptTrain.addCarriage(new PassengerCar(VALID_GROSS_WEIGHT, SEATS_CAPACITY));
+		deptTrain.addCarriage(new PassengerCar(VALID_GROSS_WEIGHT, SEATS_CAPACITY));
+		deptTrain.addCarriage(new PassengerCar(VALID_GROSS_WEIGHT, SEATS_CAPACITY));
+		
+		deptTrain.addCarriage(new FreightCar(VALID_GROSS_WEIGHT, VALID_GOOD_TYPE));
+		
+		assertFalse("Locomotive pulling power is low", deptTrain.trainCanMove() );
+		
+	}
+	
 	
 	/**
 	 * Creates a new passenger car with valid gross weight and valid number of passenger.
@@ -77,9 +117,255 @@ public class RollingStockTests {
 	 * @throws TrainException
 	 */
 	@Test (expected = TrainException.class)
-	public void testAlighInvalidNumberOfPassengers() throws TrainException{
+	public void InvalidNumberOfPassengersAlighIsDisallowed() throws TrainException{
 		PassengerCar passengerCar = new PassengerCar(VALID_GROSS_WEIGHT, VALID_NUMBER_PASSENGERS);
 		passengerCar.board(VALID_NUMBER_PASSENGERS);
 		passengerCar.alight(NEGATIVE_NUMBER_PASSENGERS);
+	}
+	
+	/**
+	 * Create a new FreightCar using a negative gross weight.
+	 * Expected to throw trainException.
+	 * 
+	 * @throws TrainException
+	 */
+	@Test (expected = TrainException.class)
+	public void FreightCarWithNegativeWeightDisallowed() throws TrainException{
+		new FreightCar(NEGATIVE_GROSS_WEIGHT, VALID_GOOD_TYPE);
+	}
+
+	
+	/**
+	 * Create a new FreightCar with a zero gross weight.
+	 * Expected train exception.
+	 * 
+	 * @throws TrainException
+	 */
+	@Test (expected = TrainException.class)
+	public void FreightCarWithZeroWeightDisallowed() throws TrainException {
+		FreightCar freightCar = new FreightCar(ZERO_GROSS_WEIGHT, VALID_GOOD_TYPE);
+	}
+	
+	/**
+	 * Create new FreightCar with valid gross weight and valid 
+	 * goodtype
+	 * Expected  to return true
+	 * 
+	 *@throws TrainException
+	 */
+	
+	@Test 
+	public void FreightCarWithValidGoodType() throws TrainException{
+		FreightCar freightCar = new FreightCar(VALID_GROSS_WEIGHT , VALID_GOOD_TYPE);
+	    assertTrue("Invalid good type", freightCar.goodsType() == VALID_GOOD_TYPE);
+ 	}
+	
+	/** Create FreightCar instance with valid gross weight and valid 
+	 * good type. Then compare with invalid good type.Then expect to 
+	 * return false for the statement
+	 * 
+	 * @throws TrainException 
+	 * 
+	 */
+	@Test
+	public void FreightCaWithInvalidGoodTypeDetected() throws TrainException{
+		FreightCar freightCar = new FreightCar(VALID_GROSS_WEIGHT , VALID_GOOD_TYPE);
+		assertFalse("Invalid good type",freightCar.goodsType() == INVALID_GOOD_TYPE);
+	}
+	
+	/**
+	 * Creates a new locomotive instance  and verifies the toString call contains the
+	 * valid goodtype
+	 * 
+	 * @throws TrainException
+	 */
+	@Test
+	public void LocomotivetoStringPrintsCorrectely() throws TrainException {
+		Locomotive locomotive = new Locomotive(VALID_GROSS_WEIGHT , VALID_CLASSIFICATION);
+		assertTrue("Method toString() has not been overrided ",locomotive.toString().contains(VALID_CLASSIFICATION));
+	}
+	
+	
+	/**
+	 * Creates a Freight instance  and verifies the toString call contains the
+	 * valid good code
+	 * 
+	 * @throws TrainException
+	 */
+	@Test
+	public void FreighttoStringPrintsCorrectely() throws TrainException {
+		FreightCar freightCar = new FreightCar(VALID_GROSS_WEIGHT , VALID_GOOD_TYPE);
+		assertTrue("Method toString() has not been overrided ",freightCar.toString().contains(VALID_GOOD_TYPE));
+	}
+	
+	/**
+	 * Create Passenger car constructor with negative seats capacity.
+	 *  Expected to throw TrainException
+	 *  
+	 * @throws TrainException
+	 */
+	@Test(expected = TrainException.class)
+	public void PassengerCarWithNegativeSeatsCapacity() 
+			throws TrainException {
+		new PassengerCar(VALID_GROSS_WEIGHT, NEGATIVE_SEATS_CAPACITY);		
+	}
+
+	/**
+	 * Create Passenger car constructor with negative gross weight.
+	 * Expected to throw TrainException
+	 *  
+	 * @throws TrainException
+	 */
+	@Test(expected = TrainException.class)
+	public void PassengerCarWithNegativeGrossWeight() 
+			throws TrainException {
+		new PassengerCar(NEGATIVE_GROSS_WEIGHT, SEATS_CAPACITY);		
+	}
+
+	/** create instance of valid PassengerCar and test for the return
+	 *  of number of installed seats capacity
+	 * 
+	 */
+	@Test 
+	public void PassengerCarNumberOfSeats() 
+			throws TrainException {
+		PassengerCar passengerCar = new PassengerCar(VALID_GROSS_WEIGHT, SEATS_CAPACITY);	
+		assertTrue("Invalid return of installed seats capacity", passengerCar.numberOfSeats() == SEATS_CAPACITY);
+	}
+
+	/** Call PassengerCar constructor with negative the number of 
+	 *  people who wish to board the carriage.
+	 *  Expected to throw TrainException message
+	 * 
+	 * @throws TrainException
+	 */
+	@Test(expected = TrainException.class)
+	public void PassengerCarWithNegativeNumberOfSeatsCapacity() 
+			throws TrainException {
+		new PassengerCar(VALID_GROSS_WEIGHT, NEGATIVE_SEATS_CAPACITY);	
+	}
+
+	/** Create instance of PassengerCar and call board() with
+	 *  negative new passenger to board.Expected to throw TrainException message
+	 * 
+	 * @throws TrainException
+	 */
+	@Test(expected = TrainException.class)
+	public void NegativeNumberOfPassengerToBoardIsInvalid() 
+			throws TrainException {
+		PassengerCar passengerCar = new PassengerCar(VALID_GROSS_WEIGHT, SEATS_CAPACITY);	
+		passengerCar.board(NEGATIVE_NUMBER_PASSENGERS);
+	}
+
+	
+	/**
+	 * Test to return its seats capacity of the carriage when more passenger try to
+	 * board than its seats capacity. Meaning to say that carriage can accommodate 
+	 * only maximum of its seats capacity. For instance, if seats capacity is 50 and people
+	 * try to board is 70, then is can take only 50.
+	 * 
+	 */
+	@Test 
+	public void MaximumPassengerCanBoard() 
+			throws TrainException {
+		PassengerCar passengerCar = new PassengerCar(VALID_GROSS_WEIGHT, SEATS_CAPACITY);	//seats capacity 50
+		passengerCar.board(NUMBER_OF_PASSENGER_TO_BOARD);  //passenger to board is more than seats capacity
+		assertTrue("Cannot accomodate more than its seats capacity", 
+				passengerCar.numberOfSeats() == SEATS_CAPACITY);
+	}
+
+
+	/**
+	 * Create passenger car instance and try to call alight with negative passenger to
+	 * depart from carriage. Then it should throw TrainException
+	 * 
+	 * @throws TrainException
+	 */
+	@Test (expected = TrainException.class)
+	public void AlighWithNegativePassengerIsDisallowed() 
+			throws TrainException {
+		PassengerCar passengerCar = new PassengerCar(VALID_GROSS_WEIGHT, SEATS_CAPACITY);	//seats capacity 50
+		passengerCar.alight(NEGATIVE_NUMBER_OF_PASSENGER_TO_DEPART);
+	}
+
+	
+
+	/**
+	 * Test perform to return number of person on board after performing sequence of action.
+	 * For instance if there are 50 seats capacity, 30 person board on train, and 5 person alight
+	 * from carriage, then it is expected to return 25. 
+	 *
+	 * @throws TrainException
+	 */
+	@Test 
+	public void NumberOfPassengerOnBoardAfterValidAlight() 
+			throws TrainException {
+		PassengerCar passengerCar = new PassengerCar(VALID_GROSS_WEIGHT, SEATS_CAPACITY);	//seats capacity 50
+
+		passengerCar.board(NUMBER_OF_PASSENGER_TO_BOARD2);//30 person on board
+
+		passengerCar.alight(NUMBER_OF_PASSENGER_TO_ALIGHT);//5 person alight/depart
+
+		assertTrue("Invalid alight from the train", passengerCar.numberOnBoard() == PESSENGER_ON_BOARD);
+	}
+	
+	/**
+	 * Creates a new passengerCar with capacity to 50 seat. Then board two set of 30 passengers.
+	 * Expected 10 passenger to be left out. 
+	 *
+	 * @throws TrainException
+	 */
+	@Test 
+	public void NumberOfPassengerLeftOut() 
+			throws TrainException {
+		PassengerCar passengerCar = new PassengerCar(VALID_GROSS_WEIGHT, SEATS_CAPACITY);	//seats capacity 50
+
+		passengerCar.board(NUMBER_OF_PASSENGER_TO_BOARD2);//30 person on board
+		
+		int leftOut = passengerCar.board(NUMBER_OF_PASSENGER_TO_BOARD2);//30 person on board
+
+		assertTrue("Invalid number of passenger left out", leftOut == 10);
+	}
+
+	/**
+	 * Creates a new passengerCar instance  and verifies the toString call contains the
+	 * valid passengerOnBoard and numberOfSeats
+	 * 
+	 * @throws TrainException
+	 */
+	@Test
+	public void PassengerCartoStringPrintsCorrectely() throws TrainException {
+		PassengerCar passengerCar = new PassengerCar(VALID_GROSS_WEIGHT, SEATS_CAPACITY);	
+		assertTrue("Method toString() has not been overrided ",
+				passengerCar.toString().contains(passengerCar.numberOnBoard() + "/" + passengerCar.numberOfSeats()));
+	}
+
+	/**
+	 * Create passenger car instance and try to call alight with 
+	 * number of departing passengers exceeds the number on board.
+	 * Then it should throw TrainException
+	 * 
+	 * @throws TrainException
+	 */
+	@Test (expected = TrainException.class)
+	public void TooManyAlighting() 
+			throws TrainException {
+		PassengerCar passengerCar = new PassengerCar(VALID_GROSS_WEIGHT, SEATS_CAPACITY);	//seats capacity 50
+	
+		passengerCar.board(SEATS_CAPACITY);
+		passengerCar.alight(NUMBER_OF_PASSENGER_TO_DEPART);
+	}
+
+	/**
+	 * Create Locomotive instance and call power().Then check the return 
+	 * value.
+	 * 
+	 */
+	@Test 
+	public void PowerCalculatedCorreclty() 
+			throws TrainException {
+		Locomotive locomotive = new Locomotive(VALID_GROSS_WEIGHT, VALID_CLASSIFICATION);	
+		
+		assertTrue("Calculation is Invalid", locomotive.power() == 400);
 	}
 }
