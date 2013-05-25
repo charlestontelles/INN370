@@ -124,6 +124,7 @@ public class BoardingTrainPanel extends JPanel {
 		addToPanel(this, spnPassengers,constraints,4,4,50,5);
 		addToPanel(this, btnBoard,constraints,5,4,0,5);
 		addToPanel(this, btnRemoveCar,constraints,6,4,0,5);
+		addToPanel(this, btnReset,constraints,7,4,0,5);
 			
 	}
 

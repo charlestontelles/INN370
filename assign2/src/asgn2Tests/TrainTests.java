@@ -475,5 +475,43 @@ public class TrainTests {
 		Constructor<?>[] constructors = DepartingTrain.class.getConstructors();
 		assertTrue("more than one constructor found", constructors.length == 1);	
 	}
+	
+	/**
+	 * Creates a new departing train, add a valid locomotive, three valid passenger car and one
+	 * valid freight car. Then board 20 passengers.
+	 * Traverse the train unboarding all passengers, then traverse the train again removing all
+	 * carriage.
+	 * In the end the departing train must be empty.
+	 * 
+	 * @throws TrainException
+	 */
+	@Test
+	public void testResetDepartingTrain() throws TrainException {
+		DepartingTrain departingTrain = new DepartingTrain();
+		int countCarriage =0;
+		
+		departingTrain.addCarriage(new Locomotive(VALID_GROSS_WEIGHT, VALID_CLASSIFICATION));
+		
+		departingTrain.addCarriage(new PassengerCar(VALID_GROSS_WEIGHT, NUMBER_OF_PASSENGER_TO_BOARD));
+		departingTrain.addCarriage(new PassengerCar(VALID_GROSS_WEIGHT, NUMBER_OF_PASSENGER_TO_BOARD));
+		departingTrain.addCarriage(new PassengerCar(VALID_GROSS_WEIGHT, NUMBER_OF_PASSENGER_TO_BOARD));
+	
+		departingTrain.addCarriage(new FreightCar(VALID_GROSS_WEIGHT, VALID_GOODS_TYPE));
+		
+		departingTrain.board(NUMBER_OF_PASSENGER_TO_BOARD*2);
+		
+		RollingStock rs = departingTrain.firstCarriage();
+		while(rs != null){
+			countCarriage++;
+			if (rs instanceof PassengerCar)
+				((PassengerCar)rs).alight(((PassengerCar)rs).numberOnBoard());
+			rs = departingTrain.nextCarriage();
+		}		
+		while (countCarriage-- > 0){
+			departingTrain.removeCarriage();
+		}
+		
+		assertTrue("should not have a locomotive", departingTrain.firstCarriage()==null);
+	}
 
 }

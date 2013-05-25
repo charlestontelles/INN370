@@ -208,20 +208,7 @@ public class DepartingTrainFrame extends JFrame implements ActionListener {
 			panel.setPassengerOut(""
 					+ departingTrain.board(panel.getNumberOfPassenger()));
 		} else if (e.getActionCommand().equalsIgnoreCase("reset")) {
-			RollingStock rollingStock;
-			departingTrain.firstCarriage();
-			while ((rollingStock = departingTrain.nextCarriage()) != null) {
-				if (rollingStock instanceof PassengerCar) {
-					((PassengerCar) rollingStock)
-							.alight(((PassengerCar) rollingStock)
-									.numberOnBoard());
-				}
-			}
-			departingTrain.firstCarriage();
-			do {
-				departingTrain.removeCarriage();
-			} while ((rollingStock = departingTrain.nextCarriage()) != null);
-
+			resetTrain();
 		}
 	}
 
@@ -249,6 +236,27 @@ public class DepartingTrainFrame extends JFrame implements ActionListener {
 		for (Integer weight : grossWeightList)
 			totalWeight += weight;
 		return totalWeight;
+	}
+	
+	/**
+	 * reset the current Departing Train.
+	 * Unboard every single passenger and remove all carriages.
+	 * 
+	 * @throws TrainException 
+	 * 
+	 */
+	private void resetTrain() throws TrainException{
+		int countCarriage = 0;
+		RollingStock rs = departingTrain.firstCarriage();
+		while(rs != null){
+			countCarriage++;
+			if (rs instanceof PassengerCar)
+				((PassengerCar)rs).alight(((PassengerCar)rs).numberOnBoard());
+			rs = departingTrain.nextCarriage();
+		}		
+		while (countCarriage-- > 0){
+			departingTrain.removeCarriage();
+		}
 	}
 		
 	/**
