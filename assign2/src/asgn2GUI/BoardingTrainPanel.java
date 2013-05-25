@@ -103,22 +103,6 @@ public class BoardingTrainPanel extends JPanel {
 		txtTotalWeight = new JTextField();
 		txtTotalWeight.setEditable(false);
 		
-		/*
-		this.add(lblNumberOfSeats);
-		this.add(txtPassengersOut);
-		this.add(lblCanMove);
-		this.add(txtTrainCanMove);
-		this.add(lblNumberOnBoard);
-		this.add(txtNumberOnBoard);
-		this.add(lblCapacity);
-		this.add(txtLocomotiveCapacity);
-		this.add(lblPassengers);
-		//this.add(btnReset); // TODO: reset button is not working
-		this.add(spnPassengers);
-		this.add(btnBoard);
-		this.add(btnRemoveCar);		
-		*/
-		
 		panelTitle.setFont(new Font("Arial", Font.BOLD, 14));
 		panelTitle.setForeground(Color.BLACK);
 
@@ -175,14 +159,20 @@ public class BoardingTrainPanel extends JPanel {
 	/**
 	 * Setter for number of passenger not boarding.
 	 * 
-	 * @param passengersOutMsg number of passengers left out
+	 * @param passengersOutMsg
+	 *            number of passengers left out
 	 */
-	public void setPassengerOut(String passengersOutMsg){
-		if(new Integer(passengersOutMsg) > 0){
-			txtPassengersOut.setText(passengersOutMsg);
+	public void setPassengerOut(String passengersOutMsg) {
+		int currentValue = txtPassengersOut.getText().length()>0?new Integer(txtPassengersOut.getText()):0;
+		if (new Integer(passengersOutMsg) > 0) {
+			txtPassengersOut.setText(""
+					+ (currentValue + new Integer(
+							passengersOutMsg)));
 			txtPassengersOut.setBackground(Color.RED);
 		} else {
-			txtPassengersOut.setText(passengersOutMsg);
+			txtPassengersOut.setText(""
+					+ (currentValue + new Integer(
+							passengersOutMsg)));
 			txtPassengersOut.setBackground(Color.GREEN);
 		}
 	}

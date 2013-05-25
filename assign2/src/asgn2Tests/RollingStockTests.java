@@ -375,9 +375,41 @@ public class RollingStockTests {
 	@Test 
 	public void testNumberOfConstructors() 
 			throws TrainException {
-
 		assertTrue("rolling stock has more than one constructor", Locomotive.class.getConstructors().length == 1);
 		assertTrue("rolling stock has more than one constructor", PassengerCar.class.getConstructors().length == 1);
 		assertTrue("rolling stock has more than one constructor", FreightCar.class.getConstructors().length == 1);
+	}
+	
+	/**
+	 * Create passenger car instance and with valid number of seats.
+	 * Then board the same number of passengers as the number of seats.
+	 * And then call alight to unboard the same number board.
+	 * Expected the number of passengers on board to be zero.
+	 * 
+	 * @throws TrainException
+	 */
+	@Test
+	public void testBoardandAlightAll() 
+			throws TrainException {
+		PassengerCar passengerCar = new PassengerCar(VALID_GROSS_WEIGHT, SEATS_CAPACITY);	//seats capacity 50
+		passengerCar.board(SEATS_CAPACITY);
+		passengerCar.alight(SEATS_CAPACITY);
+		assertTrue("number on board should be zero", passengerCar.numberOnBoard() == 0);
+	}
+
+	/**
+	 * Create passenger car instance and with valid number of seats.
+	 * Then board the same number of passengers as the number of seats.
+	 * And then call alight to unboard the same number board plus 1.
+	 * Expected train exception.
+	 * 
+	 * @throws TrainException
+	 */
+	@Test (expected = TrainException.class)
+	public void testTooManyAlight() 
+			throws TrainException {
+		PassengerCar passengerCar = new PassengerCar(VALID_GROSS_WEIGHT, SEATS_CAPACITY);	//seats capacity 50
+		passengerCar.board(SEATS_CAPACITY);
+		passengerCar.alight(SEATS_CAPACITY + 1);
 	}
 }
