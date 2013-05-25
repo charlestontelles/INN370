@@ -7,6 +7,8 @@ import java.lang.reflect.Constructor;
 
 import org.junit.Test;
 
+import com.sun.org.apache.bcel.internal.generic.LCONST;
+
 import asgn2Exceptions.TrainException;
 import asgn2RollingStock.FreightCar;
 import asgn2RollingStock.Locomotive;
@@ -403,11 +405,28 @@ public class TrainTests {
 	public void testCannotRemoveNotNullCarriage()
 			throws TrainException {
 		DepartingTrain departingTrain = new DepartingTrain();
+		departingTrain.addCarriage(new Locomotive(VALID_GROSS_WEIGHT, VALID_CLASSIFICATION));
 		departingTrain.addCarriage(new PassengerCar(VALID_GROSS_WEIGHT,
 				PASSENGERCAR_SEAT_CAPACITY));
 		departingTrain.board(NUMBER_OF_PASSENGER_TO_BOARD);
 
 		departingTrain.removeCarriage();
+	}
+	
+	/**
+	 * Creates a departing train and try to add a passenger car before
+	 * adding a locomotive.
+	 * Expected train exception
+	 * 
+	 * @throws TrainException
+	 */
+	@Test(expected = TrainException.class)
+	public void testNotAddingLocomotiveFirst()
+			throws TrainException {
+		DepartingTrain departingTrain = new DepartingTrain();
+		
+		departingTrain.addCarriage(new PassengerCar(VALID_GROSS_WEIGHT,
+				PASSENGERCAR_SEAT_CAPACITY));
 	}
 
 	/**
