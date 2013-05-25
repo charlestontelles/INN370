@@ -428,6 +428,28 @@ public class TrainTests {
 		departingTrain.addCarriage(new PassengerCar(VALID_GROSS_WEIGHT,
 				PASSENGERCAR_SEAT_CAPACITY));
 	}
+	
+	/**
+	 * Creates a departing train and adds 2 passenger cars.
+	 * Then try to remove 4 carriages 
+	 * Expected train exception
+	 * 
+	 * @throws TrainException
+	 */
+	@Test(expected = TrainException.class)
+	public void testRemovingMoreCarriagesThanExistents()
+			throws TrainException {
+		DepartingTrain departingTrain = new DepartingTrain();
+		departingTrain.addCarriage(new Locomotive(VALID_GROSS_WEIGHT, VALID_CLASSIFICATION));
+		departingTrain.addCarriage(new PassengerCar(VALID_GROSS_WEIGHT,
+				PASSENGERCAR_SEAT_CAPACITY));
+		departingTrain.addCarriage(new PassengerCar(VALID_GROSS_WEIGHT,
+				PASSENGERCAR_SEAT_CAPACITY));
+		departingTrain.removeCarriage();
+		departingTrain.removeCarriage();
+		departingTrain.removeCarriage();
+		departingTrain.removeCarriage();
+	}
 
 	/**
 	 * Cannot remove empty carriage.In other words if there is no rolling stock
