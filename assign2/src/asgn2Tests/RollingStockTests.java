@@ -9,7 +9,6 @@ import asgn2Exceptions.TrainException;
 import asgn2RollingStock.FreightCar;
 import asgn2RollingStock.Locomotive;
 import asgn2RollingStock.PassengerCar;
-import asgn2RollingStock.RollingStock;
 import asgn2Train.DepartingTrain;
 
 
@@ -39,8 +38,8 @@ public class RollingStockTests {
 	private static final int PESSENGER_ON_BOARD = 25; //Difference of A-B
 	private static final int SEATS_CAPACITY = 50;
 	private static final int NEGATIVE_SEATS_CAPACITY = -1;
-	
-	
+
+
 	/**
 	 * Try to create a new Locomotive with negative gross weight.
 	 * Expected Train exception.
@@ -51,7 +50,7 @@ public class RollingStockTests {
 	public void testNegativeGrossWeightInLocomotiveIsDisallowed() throws TrainException{
 		new Locomotive(NEGATIVE_GROSS_WEIGHT, VALID_CLASSIFICATION);
 	}
-	
+
 	/**
 	 * Try to create a new Locomotive with zero gross weight.
 	 * Expected Train exception because gross weight must be positive.
@@ -62,7 +61,7 @@ public class RollingStockTests {
 	public void testZeroGrossWeightInLocomotiveIsDisallowed() throws TrainException{
 		new Locomotive(ZERO_GROSS_WEIGHT, VALID_CLASSIFICATION);
 	}
-	
+
 	/**
 	 * Try to create a new Locomotive with power equal zero (allowed range is [1-9]).
 	 * Expected Train exception.
@@ -73,7 +72,7 @@ public class RollingStockTests {
 	public void testZeroPullingPowerIsDisallowed() throws TrainException{
 		new Locomotive(ZERO_GROSS_WEIGHT, VALID_CLASSIFICATION);
 	}
-	
+
 	/**
 	 * Try to create a new Locomotive with a type other than D/E/S.It is 
 	 * Expected to throw Train exception.
@@ -84,7 +83,7 @@ public class RollingStockTests {
 	public void testInvalidLocomotiveTypeDetected() throws TrainException{
 		new Locomotive(VALID_GROSS_WEIGHT, INVALID_LOCOMOTIVE_CODE);
 	}
-	
+
 	/**
 	 * Test to perform that locomotive pulling power by adding 
 	 * one locomotive, three passenger car and freight car with 
@@ -93,22 +92,22 @@ public class RollingStockTests {
 	 */
 	@Test 
 	public void testLocomotivePowerTooLow() throws TrainException{
-		
+
 		DepartingTrain deptTrain = new DepartingTrain();
-		
+
 		deptTrain.addCarriage(new Locomotive(VALID_GROSS_WEIGHT, VALID_CLASSIFICATION));
-		
+
 		deptTrain.addCarriage(new PassengerCar(VALID_GROSS_WEIGHT, SEATS_CAPACITY));
 		deptTrain.addCarriage(new PassengerCar(VALID_GROSS_WEIGHT, SEATS_CAPACITY));
 		deptTrain.addCarriage(new PassengerCar(VALID_GROSS_WEIGHT, SEATS_CAPACITY));
-		
+
 		deptTrain.addCarriage(new FreightCar(VALID_GROSS_WEIGHT, VALID_GOOD_TYPE));
-		
+
 		assertFalse("Locomotive pulling power is low", deptTrain.trainCanMove() );
-		
+
 	}
-	
-	
+
+
 	/**
 	 * Creates a new passenger car with valid gross weight and valid number of passenger.
 	 * Then boards a valid number of passenger. And then try to aligh a negative number of
@@ -122,7 +121,7 @@ public class RollingStockTests {
 		passengerCar.board(VALID_NUMBER_PASSENGERS);
 		passengerCar.alight(NEGATIVE_NUMBER_PASSENGERS);
 	}
-	
+
 	/**
 	 * Create a new FreightCar using a negative gross weight.
 	 * Expected to throw trainException.
@@ -134,7 +133,7 @@ public class RollingStockTests {
 		new FreightCar(NEGATIVE_GROSS_WEIGHT, VALID_GOOD_TYPE);
 	}
 
-	
+
 	/**
 	 * Create a new FreightCar with a zero gross weight.
 	 * Expected train exception.
@@ -145,7 +144,7 @@ public class RollingStockTests {
 	public void testFreightCarWithZeroWeightDisallowed() throws TrainException {
 		new FreightCar(ZERO_GROSS_WEIGHT, VALID_GOOD_TYPE);
 	}
-	
+
 	/**
 	 * Create new FreightCar with valid gross weight and valid 
 	 * goodtype
@@ -153,13 +152,13 @@ public class RollingStockTests {
 	 * 
 	 *@throws TrainException
 	 */
-	
+
 	@Test 
 	public void testFreightCarWithValidGoodType() throws TrainException{
 		FreightCar freightCar = new FreightCar(VALID_GROSS_WEIGHT , VALID_GOOD_TYPE);
-	    assertTrue("Invalid good type", freightCar.goodsType() == VALID_GOOD_TYPE);
- 	}
-	
+		assertTrue("Invalid good type", freightCar.goodsType() == VALID_GOOD_TYPE);
+	}
+
 	/** Create FreightCar instance with valid gross weight and valid 
 	 * good type. Then compare with invalid good type.Then expect to 
 	 * return false for the statement
@@ -172,7 +171,7 @@ public class RollingStockTests {
 		FreightCar freightCar = new FreightCar(VALID_GROSS_WEIGHT , VALID_GOOD_TYPE);
 		assertFalse("Invalid good type",freightCar.goodsType() == INVALID_GOOD_TYPE);
 	}
-	
+
 	/**
 	 * Creates a new locomotive instance  and verifies the toString call contains the
 	 * valid goodtype
@@ -184,8 +183,8 @@ public class RollingStockTests {
 		Locomotive locomotive = new Locomotive(VALID_GROSS_WEIGHT , VALID_CLASSIFICATION);
 		assertTrue("Method toString() has not been overrided ",locomotive.toString().contains(VALID_CLASSIFICATION));
 	}
-	
-	
+
+
 	/**
 	 * Creates a Freight instance  and verifies the toString call contains the
 	 * valid good code
@@ -197,7 +196,7 @@ public class RollingStockTests {
 		FreightCar freightCar = new FreightCar(VALID_GROSS_WEIGHT , VALID_GOOD_TYPE);
 		assertTrue("Method toString() has not been overrided ",freightCar.toString().contains(VALID_GOOD_TYPE));
 	}
-	
+
 	/**
 	 * Create Passenger car constructor with negative seats capacity.
 	 *  Expected to throw TrainException
@@ -257,7 +256,7 @@ public class RollingStockTests {
 		passengerCar.board(NEGATIVE_NUMBER_PASSENGERS);
 	}
 
-	
+
 	/**
 	 * Test to return its seats capacity of the carriage when more passenger try to
 	 * board than its seats capacity. Meaning to say that carriage can accommodate 
@@ -288,7 +287,7 @@ public class RollingStockTests {
 		passengerCar.alight(NEGATIVE_NUMBER_OF_PASSENGER_TO_DEPART);
 	}
 
-	
+
 
 	/**
 	 * Test perform to return number of person on board after performing sequence of action.
@@ -308,7 +307,7 @@ public class RollingStockTests {
 
 		assertTrue("Invalid alight from the train", passengerCar.numberOnBoard() == PESSENGER_ON_BOARD);
 	}
-	
+
 	/**
 	 * Creates a new passengerCar with capacity to 50 seat. Then board two set of 30 passengers.
 	 * Expected 10 passenger to be left out. 
@@ -321,7 +320,7 @@ public class RollingStockTests {
 		PassengerCar passengerCar = new PassengerCar(VALID_GROSS_WEIGHT, SEATS_CAPACITY);	//seats capacity 50
 
 		passengerCar.board(NUMBER_OF_PASSENGER_TO_BOARD2);//30 person on board
-		
+
 		int leftOut = passengerCar.board(NUMBER_OF_PASSENGER_TO_BOARD2);//30 person on board
 
 		assertTrue("Invalid number of passenger left out", leftOut == 10);
@@ -351,7 +350,7 @@ public class RollingStockTests {
 	public void testTooManyAlighting() 
 			throws TrainException {
 		PassengerCar passengerCar = new PassengerCar(VALID_GROSS_WEIGHT, SEATS_CAPACITY);	//seats capacity 50
-	
+
 		passengerCar.board(SEATS_CAPACITY);
 		passengerCar.alight(NUMBER_OF_PASSENGER_TO_DEPART);
 	}
@@ -365,18 +364,18 @@ public class RollingStockTests {
 	public void testPowerCalculatedCorreclty() 
 			throws TrainException {
 		Locomotive locomotive = new Locomotive(VALID_GROSS_WEIGHT, VALID_CLASSIFICATION);	
-		
+
 		assertTrue("Calculation is Invalid", locomotive.power() == 400);
 	}
-	
+
 	/**
-	 * Uses refrection to certify each rolling stock has exactly one constructor.
+	 * Uses reflection to certify each rolling stock has exactly one constructor.
 	 * 
 	 */
 	@Test 
 	public void testNumberOfConstructors() 
 			throws TrainException {
-		
+
 		assertTrue("rolling stock has more than one constructor", Locomotive.class.getConstructors().length == 1);
 		assertTrue("rolling stock has more than one constructor", PassengerCar.class.getConstructors().length == 1);
 		assertTrue("rolling stock has more than one constructor", FreightCar.class.getConstructors().length == 1);
