@@ -223,7 +223,7 @@ public class DepartingTrainFrame extends JFrame implements ActionListener {
 				+ ((Locomotive) locomotive).power() : "0");
 		boardingTrainPanel.setNumberOnBoard(departingTrain.numberOnBoard()
 				+ "/" + departingTrain.numberOfSeats());
-		boardingTrainPanel.setTotalWeight(""+getTotalGrossWeight());
+		boardingTrainPanel.setTotalWeight(""+getTotalGrossWeight());		
 	}
 
 	/**
@@ -257,6 +257,8 @@ public class DepartingTrainFrame extends JFrame implements ActionListener {
 		while (countCarriage-- > 0){
 			departingTrain.removeCarriage();
 		}
+		grossWeightList = new ArrayList<Integer>();
+		boardingTrainPanel.setPassengerOut("00");
 	}
 		
 	/**
