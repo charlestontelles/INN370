@@ -82,8 +82,8 @@ public class BoardingTrainPanel extends JPanel {
 		JLabel lblPassengers = new JLabel("Passengers:");
 		JLabel lblNumberOfSeats = new JLabel("Passengers out:");
 		JLabel lblNumberOnBoard = new JLabel("Number On Board:");
-		JLabel lblCapacity = new JLabel(" Pulling Power:");
-		JLabel lblCanMove = new JLabel("  Train Can move?");
+		JLabel lblCapacity = new JLabel("Pulling Power:  ");
+		JLabel lblCanMove = new JLabel("Train Can move:  ");
 		JLabel lblTotalWeight = new JLabel("Total Gross Weight (Tonnes):");
 
 		spnPassengers = new JSpinner();
