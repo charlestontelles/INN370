@@ -10,13 +10,13 @@ import asgn2Exceptions.TrainException;
  * as identifying codes, a certain number of wheels, the track gauge they're
  * designed for, etc, but we don't need these for this assignment.)
  * 
- * @author Charleston
+ * @author Phurpa Wangchuk(n8448060)
  * 
  */
 public abstract class RollingStock {
 
 	private Integer grossWeight;
-	
+
 	/**
 	 * Error message to be used by Train Exceptions.
 	 */

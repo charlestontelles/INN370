@@ -19,7 +19,7 @@ import javax.swing.JSpinner;
 /**
  * Graphical user interface to capture inputs related to a FreightCar.
  * 
- * @author Charleston Telles
+ * @author Charleston Telles and Phurpa Wangchuk(Co-author and layout formating)
  * 
  */
 public class FreightCarPanel extends JPanel {
@@ -85,7 +85,7 @@ public class FreightCarPanel extends JPanel {
 		panelTitle.setForeground(Color.BLACK);
 
 		GridBagConstraints constraints = new GridBagConstraints(); 
-		constraints.fill = GridBagConstraints.NONE;
+		constraints.fill = GridBagConstraints.HORIZONTAL;
 		
 		addToPanel(this, panelTitle,constraints,0,10,17,17);
 		addToPanel(this, lblType,constraints,0,11,17,17);
@@ -94,7 +94,7 @@ public class FreightCarPanel extends JPanel {
 		addToPanel(this, dangerousButton,constraints,0,14,10,15);
 		addToPanel(this, lblWeight,constraints,0,15,20,10);
 		addToPanel(this, spnWeight,constraints,1,15,20,10);
-		addToPanel(this, btnAdd,constraints,0,16,10,10);
+		addToPanel(this, btnAdd,constraints,1,16,10,10);
 	}
 
 	/**

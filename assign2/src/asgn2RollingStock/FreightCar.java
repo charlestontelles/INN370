@@ -10,18 +10,18 @@ import asgn2Exceptions.TrainException;
  * "G" - General goods "R" - Refrigerated goods "D" - Dangerous materials
  * 
  * 
- * @author Charleston
+ * @author Phurpa Wangchuk(n8448060)
  * 
  */
 public class FreightCar extends RollingStock {
 
 	private String goodsType;
-	
+
 	/**
 	 * Error message to be used by Train Exceptions.
 	 */
 	private static final String INVALID_GOODS_TYPE = "Invalid Goods Type, expected G/R/D";
-	
+
 
 	/**
 	 * Constructs a freight car object.

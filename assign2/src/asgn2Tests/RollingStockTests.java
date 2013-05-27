@@ -16,7 +16,7 @@ import asgn2Train.DepartingTrain;
  * Test Cases for Rolling Stocks.
  * 
  * 
- * @author Phurpa and Charleston
+ * @author Phurpa Wangchuk and Charleston
  * 
  */
 public class RollingStockTests {

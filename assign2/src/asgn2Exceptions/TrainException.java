@@ -4,7 +4,7 @@ package asgn2Exceptions;
  * A simple class for exceptions thrown by railway shunting and boarding
  * operations.
  * 
- * @author Charleston
+ * @author Phurpa Wangchuk(n8448060)
  * 
  */
 public class TrainException extends Exception {

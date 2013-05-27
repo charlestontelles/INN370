@@ -15,7 +15,7 @@ import javax.swing.JSpinner;
 /**
  * Graphical user interface to capture inputs related to a PassengerCar.
  * 
- * @author Charleston Telles
+ * @author Charleston Telles and Phurpa Wangchuk(Co-author and layout formating)
  * 
  */
 public class PassengerCarPanel extends JPanel {
@@ -67,11 +67,11 @@ public class PassengerCarPanel extends JPanel {
 
 		panelTitle.setFont(new Font("Arial", Font.BOLD, 14));
 		panelTitle.setForeground(Color.BLACK);
-		
+
 		GridBagConstraints constraints = new GridBagConstraints(); 
 		constraints.fill = GridBagConstraints.HORIZONTAL;
-			
-	    addToPanel(this, panelTitle,constraints,0,0,7,7);
+
+		addToPanel(this, panelTitle,constraints,0,0,7,7);
 		addToPanel(this, lblEmpty,constraints,0,0,7,7);
 		addToPanel(this, lblWeight,constraints,10,10,7,7);
 		addToPanel(this, spnWeight,constraints,11,10,20,10);

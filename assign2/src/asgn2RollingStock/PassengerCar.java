@@ -8,22 +8,22 @@ import asgn2Exceptions.TrainException;
  * assigned a seat (unlike your peak-hour, metropolitan commuting experience!).
  * 
  * 
- * @author Charleston
+ * @author Phurpa Wangchuk(n8448060)
  * 
  */
 public class PassengerCar extends RollingStock {
 
 	private Integer numberOfSeats;
-	
+
 	private Integer passengerOnBoard;
-	
+
 	/**
 	 * Error messages to be used by Train Exceptions.
 	 */
 	private final static String NUM_PASSENGERS_CANNOT_BE_NEGATIVE = "Number of Passengers cannot be negative";
 	private final static String NUM_SEATS_CANNOT_BE_NEGATIVE = "Number of Seats cannot be negative";
 	private final static String CANNOT_ALIGHT_MORE_THAN_BOARDED = "Cannont alight more passengers than boarded";
-	
+
 
 	/**
 	 * Constructs a passenger car with a known weight and a fixed number of
@@ -67,7 +67,7 @@ public class PassengerCar extends RollingStock {
 			throw new TrainException(NUM_PASSENGERS_CANNOT_BE_NEGATIVE);
 		if(departingPassengers > passengerOnBoard)
 			throw new TrainException(CANNOT_ALIGHT_MORE_THAN_BOARDED);
-		
+
 		passengerOnBoard -= departingPassengers;
 	}
 
@@ -124,7 +124,6 @@ public class PassengerCar extends RollingStock {
 	 */
 	@Override
 	public String toString() {
-		// TODO Auto-generated method stub
 		return "Passenger(" + passengerOnBoard + "/" + numberOfSeats + ")";
 	}
 
