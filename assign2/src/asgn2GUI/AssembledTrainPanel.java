@@ -11,11 +11,11 @@ import asgn2RollingStock.RollingStock;
 import asgn2Train.DepartingTrain;
 
 /**
- * Graphical user interface represents a locomotive.
- * Uses a typical canvas drawing to add and resize images providing
- * a good train representation.
+ * Graphical user interface represents a locomotive. Uses a typical canvas
+ * drawing to add and resize images providing a good train representation.
  * 
- * @author Charleston Telles
+ * @author  Charleston Telles(n8388342) (developer), 
+ * 			Phurpa Wangchuk(n8448060) (developer, layout and formating)
  * 
  */
 public class AssembledTrainPanel extends JPanel {
@@ -37,23 +37,25 @@ public class AssembledTrainPanel extends JPanel {
 
 	/**
 	 * 
-	 * @param departingTrain a reference object representing a departing train
+	 * @param departingTrain
+	 *            a reference object representing a departing train
 	 * 
-	 * @param actionListener a external listener added to local buttons as observer
+	 * @param actionListener
+	 *            a external listener added to local buttons as observer
 	 */
 	public AssembledTrainPanel(DepartingTrain departingTrain,
 			ActionListener actionListener) {
 
 		this.departingTrain = departingTrain;
 		initComponents();
-		
+
 	}
 
 	/**
 	 * Draw a departing train using carriages images.
 	 * 
-	 * The images positioning has to be calculate in detail to guarantee
-	 * a proper visualisation.
+	 * The images positioning has to be calculate in detail to guarantee a
+	 * proper visualisation.
 	 * 
 	 */
 	protected void paintComponent(java.awt.Graphics g) {
@@ -92,7 +94,7 @@ public class AssembledTrainPanel extends JPanel {
 			}
 			nextCarriage = departingTrain.nextCarriage();
 			i++;
-			
+
 		}
 	}
 
@@ -100,13 +102,15 @@ public class AssembledTrainPanel extends JPanel {
 	 * Initiliases components to be used by this panel.
 	 */
 	public void initComponents() {
-		java.net.URL url = ClassLoader.getSystemResource("./asgn2GUI/Images/locomotive.png");
+		java.net.URL url = ClassLoader
+				.getSystemResource("./asgn2GUI/Images/locomotive.png");
 		this.locomotiveImage = new javax.swing.ImageIcon(url).getImage();
 
 		url = ClassLoader.getSystemResource("./asgn2GUI/Images/freightcar.png");
 		this.freightImage = new javax.swing.ImageIcon(url).getImage();
 
-		url = ClassLoader.getSystemResource("./asgn2GUI/Images/passengercar.png");
+		url = ClassLoader
+				.getSystemResource("./asgn2GUI/Images/passengercar.png");
 		this.passengerImage = new javax.swing.ImageIcon(url).getImage();
 	}
 }

@@ -10,7 +10,8 @@ import asgn2Exceptions.TrainException;
  * "G" - General goods "R" - Refrigerated goods "D" - Dangerous materials
  * 
  * 
- * @author Phurpa Wangchuk(n8448060)
+ * @author  Charleston Telles(n8388342) (developer), 
+ * 			Phurpa Wangchuk(n8448060) (reviewer)
  * 
  */
 public class FreightCar extends RollingStock {

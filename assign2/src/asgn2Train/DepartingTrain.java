@@ -32,16 +32,11 @@ import asgn2RollingStock.RollingStock;
  * board the train.
  * 
  * 
- * @author Charleston
+ * @author  Charleston Telles(n8388342) (developer), 
+ * 			Phurpa Wangchuk(n8448060) (reviewer)
  * 
  */
 public class DepartingTrain {
-
-	/**
-	 * For convenience the Locomotive object will be stored in a separate
-	 * variable rather than the carriages List
-	 */
-	// private Locomotive locomotive;
 
 	/**
 	 * Stores all carriages for a departing trains excluding the locomotive

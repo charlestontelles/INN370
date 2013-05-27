@@ -8,7 +8,8 @@ import asgn2Exceptions.TrainException;
  * assigned a seat (unlike your peak-hour, metropolitan commuting experience!).
  * 
  * 
- * @author Phurpa Wangchuk(n8448060)
+ * @author  Charleston Telles(n8388342) (developer), 
+ * 			Phurpa Wangchuk(n8448060) (reviewer)
  * 
  */
 public class PassengerCar extends RollingStock {
@@ -23,7 +24,6 @@ public class PassengerCar extends RollingStock {
 	private final static String NUM_PASSENGERS_CANNOT_BE_NEGATIVE = "Number of Passengers cannot be negative";
 	private final static String NUM_SEATS_CANNOT_BE_NEGATIVE = "Number of Seats cannot be negative";
 	private final static String CANNOT_ALIGHT_MORE_THAN_BOARDED = "Cannont alight more passengers than boarded";
-
 
 	/**
 	 * Constructs a passenger car with a known weight and a fixed number of
@@ -65,7 +65,7 @@ public class PassengerCar extends RollingStock {
 	public void alight(Integer departingPassengers) throws TrainException {
 		if (departingPassengers < 0)
 			throw new TrainException(NUM_PASSENGERS_CANNOT_BE_NEGATIVE);
-		if(departingPassengers > passengerOnBoard)
+		if (departingPassengers > passengerOnBoard)
 			throw new TrainException(CANNOT_ALIGHT_MORE_THAN_BOARDED);
 
 		passengerOnBoard -= departingPassengers;
@@ -90,11 +90,11 @@ public class PassengerCar extends RollingStock {
 		if (newPassengers < 0) {
 			throw new TrainException(NUM_PASSENGERS_CANNOT_BE_NEGATIVE);
 		}
-		if (numberOfSeats - passengerOnBoard >= newPassengers){
+		if (numberOfSeats - passengerOnBoard >= newPassengers) {
 			passengerOnBoard += newPassengers;
-		}else{
+		} else {
 			unableToBoard = newPassengers - (numberOfSeats - passengerOnBoard);
-			passengerOnBoard += numberOfSeats - passengerOnBoard;			
+			passengerOnBoard += numberOfSeats - passengerOnBoard;
 		}
 		return unableToBoard;
 	}

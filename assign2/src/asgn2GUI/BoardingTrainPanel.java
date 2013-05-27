@@ -20,7 +20,8 @@ import javax.swing.JTextField;
  * passenger on board, passenger remaining, can move (yes/no) and total
  * capacity)
  * 
- * @author Charleston Telles
+ * @author  Charleston Telles(n8388342) (developer), 
+ * 			Phurpa Wangchuk(n8448060) (developer, layout and formating)
  * 
  */
 public class BoardingTrainPanel extends JPanel {
@@ -169,8 +170,8 @@ public class BoardingTrainPanel extends JPanel {
 	 * Setter for number of passenger not boarding.
 	 * 
 	 * @param passengersOutMsg
-	 *            number of passengers left out
-	 *        special value "00" used to reset the counter
+	 *            number of passengers left out special value "00" used to reset
+	 *            the counter
 	 */
 	public void setPassengerOut(String passengersOutMsg) {
 		int currentValue = txtPassengersOut.getText().length() > 0

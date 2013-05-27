@@ -19,8 +19,9 @@ import javax.swing.JSpinner;
 /**
  * Graphical user interface to capture inputs related to a Locomotive.
  * 
- * @author Charleston Telles and Phurpa Wangchuk(Co-author and layout formating) 
- *  
+ * @author  Charleston Telles(n8388342) (developer), 
+ * 			Phurpa Wangchuk(n8448060) (developer, layout and formating)
+ * 
  */
 public class LocomotivePanel extends JPanel {
 
@@ -59,8 +60,8 @@ public class LocomotivePanel extends JPanel {
 	/**
 	 * Set the panel layout and arrange the components within the panel
 	 * 
-	 * TODO: CONVERT TO GRIDBAGLAYOUT
-	 * locomotivePnl panel is added on the WEST to display the locomotive control
+	 * TODO: CONVERT TO GRIDBAGLAYOUT locomotivePnl panel is added on the WEST
+	 * to display the locomotive control
 	 */
 	public void initComponents() {
 		setLayout(new GridBagLayout());
@@ -90,42 +91,48 @@ public class LocomotivePanel extends JPanel {
 		panelTitle.setFont(new Font("Arial", Font.BOLD, 14));
 		panelTitle.setForeground(Color.BLACK);
 
-		GridBagConstraints constraints = new GridBagConstraints(); 
+		GridBagConstraints constraints = new GridBagConstraints();
 		constraints.fill = GridBagConstraints.HORIZONTAL;
 
-		addToPanel(this, panelTitle,constraints,0,10,17,17);
-		addToPanel(this, lblType,constraints,0,12,17,17);
-		addToPanel(this, eletricButton,constraints,0,13,17,17);
-		addToPanel(this, dieselButton,constraints,0,14,17,17);
-		addToPanel(this, steamButton,constraints,0,15,17,17);
-		addToPanel(this, lblWeight,constraints,0,16,20,10);
-		addToPanel(this, spnWeight,constraints,1,16,20,10);
-		addToPanel(this, lblPowerClass,constraints,0,17,20,10);
-		addToPanel(this, spnPowerClass,constraints,1,17,20,10);
-		addToPanel(this, btnAdd,constraints,1,18,20,10);
+		addToPanel(this, panelTitle, constraints, 0, 10, 17, 17);
+		addToPanel(this, lblType, constraints, 0, 12, 17, 17);
+		addToPanel(this, eletricButton, constraints, 0, 13, 17, 17);
+		addToPanel(this, dieselButton, constraints, 0, 14, 17, 17);
+		addToPanel(this, steamButton, constraints, 0, 15, 17, 17);
+		addToPanel(this, lblWeight, constraints, 0, 16, 20, 10);
+		addToPanel(this, spnWeight, constraints, 1, 16, 20, 10);
+		addToPanel(this, lblPowerClass, constraints, 0, 17, 20, 10);
+		addToPanel(this, spnPowerClass, constraints, 1, 17, 20, 10);
+		addToPanel(this, btnAdd, constraints, 1, 18, 20, 10);
 
 	}
 
 	/**
 	 * 
-	 * A convenience method to add a component to given grid bag
-	 * layout locations. 
-	 *
-	 * @param c the component to add
-	 * @param constraints the grid bag constraints to use
-	 * @param x the x grid position
-	 * @param y the y grid position
-	 * @param w the grid width
-	 * @param h the grid height
+	 * A convenience method to add a component to given grid bag layout
+	 * locations.
+	 * 
+	 * @param c
+	 *            the component to add
+	 * @param constraints
+	 *            the grid bag constraints to use
+	 * @param x
+	 *            the x grid position
+	 * @param y
+	 *            the y grid position
+	 * @param w
+	 *            the grid width
+	 * @param h
+	 *            the grid height
 	 */
-	private void addToPanel(JPanel jp,Component c, GridBagConstraints constraints, int x, int y, int w, int h) {  
+	private void addToPanel(JPanel jp, Component c,
+			GridBagConstraints constraints, int x, int y, int w, int h) {
 		constraints.gridx = x;
 		constraints.gridy = y;
 		constraints.ipadx = w;
 		constraints.ipady = h;
 		jp.add(c, constraints);
 	}
-
 
 	/**
 	 * Getter for EngineType
@@ -161,7 +168,7 @@ public class LocomotivePanel extends JPanel {
 	 */
 	public int getWeight() {
 		return spnWeight != null ? new Integer(spnWeight.getValue().toString())
-		: 0;
+				: 0;
 	}
 
 }

@@ -10,7 +10,8 @@ import asgn2Exceptions.TrainException;
  * as identifying codes, a certain number of wheels, the track gauge they're
  * designed for, etc, but we don't need these for this assignment.)
  * 
- * @author Phurpa Wangchuk(n8448060)
+ * @author Phurpa Wangchuk(n8448060) (developer), Charleston Telles(n8388342)
+ *         (reviewer)
  * 
  */
 public abstract class RollingStock {
@@ -21,7 +22,6 @@ public abstract class RollingStock {
 	 * Error message to be used by Train Exceptions.
 	 */
 	protected final static String GROSS_WEIGTH_INVALID = "Gross weight must be positive";
-
 
 	/**
 	 * Constructs a railway carriage with a specific gross weight (i.e., the

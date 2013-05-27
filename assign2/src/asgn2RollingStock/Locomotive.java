@@ -34,7 +34,8 @@ import asgn2Exceptions.TrainException;
  * which weighs 180 tonnes cannot move!
  * 
  * 
- * @author Phurpa Wangchuk(n8448060)
+ * @author  Charleston Telles(n8388342) (developer), 
+ * 			Phurpa Wangchuk(n8448060) (reviewer)
  * 
  */
 public class Locomotive extends RollingStock {

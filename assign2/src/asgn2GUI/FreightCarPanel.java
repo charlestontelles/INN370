@@ -19,7 +19,8 @@ import javax.swing.JSpinner;
 /**
  * Graphical user interface to capture inputs related to a FreightCar.
  * 
- * @author Charleston Telles and Phurpa Wangchuk(Co-author and layout formating)
+ * @author  Charleston Telles(n8388342) (developer), 
+ * 			Phurpa Wangchuk(n8448060) (developer, layout and formating)
  * 
  */
 public class FreightCarPanel extends JPanel {
@@ -40,6 +41,7 @@ public class FreightCarPanel extends JPanel {
 	 * Text box (spinner) for FreightCar's weight
 	 */
 	private JSpinner spnWeight;
+
 	/**
 	 * Panel constructor receives a external listener to be added as observer
 	 * 
@@ -59,7 +61,7 @@ public class FreightCarPanel extends JPanel {
 	public void initComponents() {
 		this.setLayout(new GridBagLayout());
 		this.setBackground(Color.LIGHT_GRAY);
-		
+
 		JLabel panelTitle = new JLabel("Freight Car");
 		JLabel lblType = new JLabel("Kind of Goods:");
 		JLabel lblWeight = new JLabel("Gross Weight:");
@@ -76,7 +78,6 @@ public class FreightCarPanel extends JPanel {
 		checkBoxGoodsType.add(refrigeratedButton);
 		checkBoxGoodsType.add(dangerousButton);
 
-
 		spnWeight = new JSpinner();
 
 		btnAdd = new JButton("Add");
@@ -84,32 +85,39 @@ public class FreightCarPanel extends JPanel {
 		panelTitle.setFont(new Font("Arial", Font.BOLD, 14));
 		panelTitle.setForeground(Color.BLACK);
 
-		GridBagConstraints constraints = new GridBagConstraints(); 
+		GridBagConstraints constraints = new GridBagConstraints();
 		constraints.fill = GridBagConstraints.HORIZONTAL;
-		
-		addToPanel(this, panelTitle,constraints,0,10,17,17);
-		addToPanel(this, lblType,constraints,0,11,17,17);
-		addToPanel(this, generalButton,constraints,0,12,20,17);
-		addToPanel(this, refrigeratedButton,constraints,0,13,0,20);
-		addToPanel(this, dangerousButton,constraints,0,14,10,15);
-		addToPanel(this, lblWeight,constraints,0,15,20,10);
-		addToPanel(this, spnWeight,constraints,1,15,20,10);
-		addToPanel(this, btnAdd,constraints,1,16,10,10);
+
+		addToPanel(this, panelTitle, constraints, 0, 10, 17, 17);
+		addToPanel(this, lblType, constraints, 0, 11, 17, 17);
+		addToPanel(this, generalButton, constraints, 0, 12, 20, 17);
+		addToPanel(this, refrigeratedButton, constraints, 0, 13, 0, 20);
+		addToPanel(this, dangerousButton, constraints, 0, 14, 10, 15);
+		addToPanel(this, lblWeight, constraints, 0, 15, 20, 10);
+		addToPanel(this, spnWeight, constraints, 1, 15, 20, 10);
+		addToPanel(this, btnAdd, constraints, 1, 16, 10, 10);
 	}
 
 	/**
 	 * 
-	 * A convenience method to add a component to given grid bag
-	 * layout locations. 
-	 *
-	 * @param c the component to add
-	 * @param constraints the grid bag constraints to use
-	 * @param x the x grid position
-	 * @param y the y grid position
-	 * @param w the grid width
-	 * @param h the grid height
+	 * A convenience method to add a component to given grid bag layout
+	 * locations.
+	 * 
+	 * @param c
+	 *            the component to add
+	 * @param constraints
+	 *            the grid bag constraints to use
+	 * @param x
+	 *            the x grid position
+	 * @param y
+	 *            the y grid position
+	 * @param w
+	 *            the grid width
+	 * @param h
+	 *            the grid height
 	 */
-	private void addToPanel(JPanel jp,Component c, GridBagConstraints constraints, int x, int y, int w, int h) {  
+	private void addToPanel(JPanel jp, Component c,
+			GridBagConstraints constraints, int x, int y, int w, int h) {
 		constraints.gridx = x;
 		constraints.gridy = y;
 		constraints.ipadx = w;
@@ -117,15 +125,14 @@ public class FreightCarPanel extends JPanel {
 		jp.add(c, constraints);
 	}
 
-
 	/**
 	 * Getter for Goods Type
 	 * 
 	 * @return FreightCar's goods type
 	 */
-	public String getGoodsType(){
-		for (Enumeration<AbstractButton> buttons = checkBoxGoodsType.getElements(); buttons
-				.hasMoreElements();) {
+	public String getGoodsType() {
+		for (Enumeration<AbstractButton> buttons = checkBoxGoodsType
+				.getElements(); buttons.hasMoreElements();) {
 			AbstractButton button = buttons.nextElement();
 
 			if (button.isSelected()) {
@@ -140,8 +147,9 @@ public class FreightCarPanel extends JPanel {
 	 * 
 	 * @return FreightCar's weight
 	 */
-	public int getWeight(){
-		return spnWeight!=null?new Integer(spnWeight.getValue().toString()):0;
+	public int getWeight() {
+		return spnWeight != null ? new Integer(spnWeight.getValue().toString())
+				: 0;
 	}
 
 }

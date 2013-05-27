@@ -14,12 +14,11 @@ import asgn2RollingStock.PassengerCar;
 import asgn2RollingStock.RollingStock;
 import asgn2Train.DepartingTrain;
 
-
 /**
  * Test Cases for Departing Train.
  * 
- * 
- * @author Phurpa and Charleston
+ * @author  Phurpa Wangchuk(n8448060) (tester),
+ * 			Charleston Telles(n8388342) (tests reviewer)
  * 
  */
 public class TrainTests {
@@ -39,7 +38,7 @@ public class TrainTests {
 	 * @throws TrainException
 	 */
 	@Test
-	public void testCanIterateThroughtCarriages() throws TrainException{
+	public void testCanIterateThroughtCarriages() throws TrainException {
 		int carriageCount = 0;
 
 		DepartingTrain departingTrain = new DepartingTrain();
@@ -73,21 +72,21 @@ public class TrainTests {
 	}
 
 	/**
-	 * Creates a departing train and adds a valid locomotive and a valid freight car.
-	 * Then try to add a passenger after the freight car.
-	 * Expected train exception.
+	 * Creates a departing train and adds a valid locomotive and a valid freight
+	 * car. Then try to add a passenger after the freight car. Expected train
+	 * exception.
 	 * 
 	 * @throws TrainException
 	 */
-	@Test (expected = TrainException.class)
-	public void testFreightBeforePassengers()
-			throws TrainException {
+	@Test(expected = TrainException.class)
+	public void testFreightBeforePassengers() throws TrainException {
 		DepartingTrain departingTrain = new DepartingTrain();
 
 		departingTrain.addCarriage(new Locomotive(VALID_GROSS_WEIGHT,
 				VALID_CLASSIFICATION));
 
-		departingTrain.addCarriage(new FreightCar(VALID_GROSS_WEIGHT, VALID_GOODS_TYPE));
+		departingTrain.addCarriage(new FreightCar(VALID_GROSS_WEIGHT,
+				VALID_GOODS_TYPE));
 
 		departingTrain.addCarriage(new PassengerCar(VALID_GROSS_WEIGHT,
 				PASSENGERCAR_SEAT_CAPACITY));
@@ -109,7 +108,8 @@ public class TrainTests {
 	}
 
 	/**
-	 * Create a new departing train and test that null train can move. Expect true.
+	 * Create a new departing train and test that null train can move. Expect
+	 * true.
 	 */
 	@Test
 	public void testTrainConstructorNotNull() {
@@ -118,8 +118,8 @@ public class TrainTests {
 	}
 
 	/**
-	 * Create instance of departingTrain and check the initial seats capacity of the car to
-	 * to return zero.
+	 * Create instance of departingTrain and check the initial seats capacity of
+	 * the car to to return zero.
 	 * 
 	 */
 	@Test
@@ -149,7 +149,6 @@ public class TrainTests {
 
 	}
 
-
 	/**
 	 * Test by boarding exact number of passenger to seats capacity. then it is
 	 * expected to return true, otherwise false
@@ -157,7 +156,7 @@ public class TrainTests {
 	 */
 	@Test
 	public void testTrainExactlyFull() throws TrainException {
-		PassengerCar passengerCar = new PassengerCar(VALID_GROSS_WEIGHT, 
+		PassengerCar passengerCar = new PassengerCar(VALID_GROSS_WEIGHT,
 				PASSENGERCAR_SEAT_CAPACITY);
 		passengerCar.board(PASSENGERCAR_SEAT_CAPACITY);
 		assertTrue("Passenger on board is not full ",
@@ -165,9 +164,8 @@ public class TrainTests {
 	}
 
 	/**
-	 * Added the following valid train configuration. It is expected
-	 * to return false. In other words Train is overloaded and cannot
-	 * move.
+	 * Added the following valid train configuration. It is expected to return
+	 * false. In other words Train is overloaded and cannot move.
 	 */
 	@Test
 	public void testTrainOverLoaded() throws TrainException {
@@ -185,15 +183,16 @@ public class TrainTests {
 		departingTrain.addCarriage(new FreightCar(VALID_GROSS_WEIGHT,
 				VALID_GOODS_TYPE));
 
-		assertFalse("Train is over loaded to move ", departingTrain.trainCanMove());
+		assertFalse("Train is over loaded to move ",
+				departingTrain.trainCanMove());
 	}
 
 	/**
-	 * Passenger on board strictly greater than or equal to 
-	 * seat capacity will return true, otherwise false
+	 * Passenger on board strictly greater than or equal to seat capacity will
+	 * return true, otherwise false
 	 * 
 	 */
-	@Test 
+	@Test
 	public void testPassengerCanBoard() throws TrainException {
 		DepartingTrain departingTrain = new DepartingTrain();
 		departingTrain.addCarriage(new Locomotive(VALID_GROSS_WEIGHT,
@@ -202,8 +201,8 @@ public class TrainTests {
 		departingTrain.addCarriage(new PassengerCar(VALID_GROSS_WEIGHT,
 				PASSENGERCAR_SEAT_CAPACITY));
 		departingTrain.board(NUMBER_OF_PASSENGER_TO_BOARD);
-		assertTrue("Too many passenger on board", NUMBER_OF_PASSENGER_TO_BOARD <=
-				PASSENGERCAR_SEAT_CAPACITY);
+		assertTrue("Too many passenger on board",
+				NUMBER_OF_PASSENGER_TO_BOARD <= PASSENGERCAR_SEAT_CAPACITY);
 	}
 
 	/**
@@ -212,7 +211,7 @@ public class TrainTests {
 	 * @throws TrainException
 	 */
 
-	@Test (expected = TrainException.class)
+	@Test(expected = TrainException.class)
 	public void testMoreLocomotive() throws TrainException {
 		DepartingTrain departingTrain = new DepartingTrain();
 		departingTrain.addCarriage(new Locomotive(VALID_GROSS_WEIGHT,
@@ -222,13 +221,12 @@ public class TrainTests {
 
 	}
 
-
 	/**
 	 * Check with negative number of people who wish to board the carriage
 	 * 
 	 * @throws TrainException
 	 */
-	@Test (expected = TrainException.class)
+	@Test(expected = TrainException.class)
 	public void testNumberOnBoardWithNegativePassenger() throws TrainException {
 		DepartingTrain departingTrain = new DepartingTrain();
 		departingTrain.addCarriage(new PassengerCar(VALID_GROSS_WEIGHT,
@@ -261,7 +259,8 @@ public class TrainTests {
 	 */
 
 	@Test(expected = TrainException.class)
-	public void testAddingLocomotiveToExistingLocomotiveIsDisallowed() throws TrainException {
+	public void testAddingLocomotiveToExistingLocomotiveIsDisallowed()
+			throws TrainException {
 		DepartingTrain departingTrain = new DepartingTrain();
 		departingTrain.addCarriage(new Locomotive(VALID_GROSS_WEIGHT,
 				VALID_CLASSIFICATION));
@@ -390,8 +389,6 @@ public class TrainTests {
 				carriageCount == 4);
 	}
 
-
-
 	/**
 	 * Test case for the Carriage which cannot be removed if there is already
 	 * passenger on it. If attempted to remove then it is expected to throws
@@ -400,10 +397,10 @@ public class TrainTests {
 	 * @throws TrainException
 	 */
 	@Test(expected = TrainException.class)
-	public void testCannotRemoveNotNullCarriage()
-			throws TrainException {
+	public void testCannotRemoveNotNullCarriage() throws TrainException {
 		DepartingTrain departingTrain = new DepartingTrain();
-		departingTrain.addCarriage(new Locomotive(VALID_GROSS_WEIGHT, VALID_CLASSIFICATION));
+		departingTrain.addCarriage(new Locomotive(VALID_GROSS_WEIGHT,
+				VALID_CLASSIFICATION));
 		departingTrain.addCarriage(new PassengerCar(VALID_GROSS_WEIGHT,
 				PASSENGERCAR_SEAT_CAPACITY));
 		departingTrain.board(NUMBER_OF_PASSENGER_TO_BOARD);
@@ -412,15 +409,13 @@ public class TrainTests {
 	}
 
 	/**
-	 * Creates a departing train and try to add a passenger car before
-	 * adding a locomotive.
-	 * Expected train exception
+	 * Creates a departing train and try to add a passenger car before adding a
+	 * locomotive. Expected train exception
 	 * 
 	 * @throws TrainException
 	 */
 	@Test(expected = TrainException.class)
-	public void testNotAddingLocomotiveFirst()
-			throws TrainException {
+	public void testNotAddingLocomotiveFirst() throws TrainException {
 		DepartingTrain departingTrain = new DepartingTrain();
 
 		departingTrain.addCarriage(new PassengerCar(VALID_GROSS_WEIGHT,
@@ -428,17 +423,16 @@ public class TrainTests {
 	}
 
 	/**
-	 * Creates a departing train and adds 2 passenger cars.
-	 * Then try to remove 4 carriages 
-	 * Expected train exception
+	 * Creates a departing train and adds 2 passenger cars. Then try to remove 4
+	 * carriages Expected train exception
 	 * 
 	 * @throws TrainException
 	 */
 	@Test(expected = TrainException.class)
-	public void testRemovingMoreCarriagesThanExistents()
-			throws TrainException {
+	public void testRemovingMoreCarriagesThanExistents() throws TrainException {
 		DepartingTrain departingTrain = new DepartingTrain();
-		departingTrain.addCarriage(new Locomotive(VALID_GROSS_WEIGHT, VALID_CLASSIFICATION));
+		departingTrain.addCarriage(new Locomotive(VALID_GROSS_WEIGHT,
+				VALID_CLASSIFICATION));
 		departingTrain.addCarriage(new PassengerCar(VALID_GROSS_WEIGHT,
 				PASSENGERCAR_SEAT_CAPACITY));
 		departingTrain.addCarriage(new PassengerCar(VALID_GROSS_WEIGHT,
@@ -473,45 +467,51 @@ public class TrainTests {
 	@Test
 	public void testNumberOfConstructors() throws TrainException {
 		Constructor<?>[] constructors = DepartingTrain.class.getConstructors();
-		assertTrue("more than one constructor found", constructors.length == 1);	
+		assertTrue("more than one constructor found", constructors.length == 1);
 	}
-	
+
 	/**
-	 * Creates a new departing train, add a valid locomotive, three valid passenger car and one
-	 * valid freight car. Then board 20 passengers.
-	 * Traverse the train unboarding all passengers, then traverse the train again removing all
-	 * carriage.
-	 * In the end the departing train must be empty.
+	 * Creates a new departing train, add a valid locomotive, three valid
+	 * passenger car and one valid freight car. Then board 20 passengers.
+	 * Traverse the train unboarding all passengers, then traverse the train
+	 * again removing all carriage. In the end the departing train must be
+	 * empty.
 	 * 
 	 * @throws TrainException
 	 */
 	@Test
 	public void testResetDepartingTrain() throws TrainException {
 		DepartingTrain departingTrain = new DepartingTrain();
-		int countCarriage =0;
-		
-		departingTrain.addCarriage(new Locomotive(VALID_GROSS_WEIGHT, VALID_CLASSIFICATION));
-		
-		departingTrain.addCarriage(new PassengerCar(VALID_GROSS_WEIGHT, NUMBER_OF_PASSENGER_TO_BOARD));
-		departingTrain.addCarriage(new PassengerCar(VALID_GROSS_WEIGHT, NUMBER_OF_PASSENGER_TO_BOARD));
-		departingTrain.addCarriage(new PassengerCar(VALID_GROSS_WEIGHT, NUMBER_OF_PASSENGER_TO_BOARD));
-	
-		departingTrain.addCarriage(new FreightCar(VALID_GROSS_WEIGHT, VALID_GOODS_TYPE));
-		
-		departingTrain.board(NUMBER_OF_PASSENGER_TO_BOARD*2);
-		
+		int countCarriage = 0;
+
+		departingTrain.addCarriage(new Locomotive(VALID_GROSS_WEIGHT,
+				VALID_CLASSIFICATION));
+
+		departingTrain.addCarriage(new PassengerCar(VALID_GROSS_WEIGHT,
+				NUMBER_OF_PASSENGER_TO_BOARD));
+		departingTrain.addCarriage(new PassengerCar(VALID_GROSS_WEIGHT,
+				NUMBER_OF_PASSENGER_TO_BOARD));
+		departingTrain.addCarriage(new PassengerCar(VALID_GROSS_WEIGHT,
+				NUMBER_OF_PASSENGER_TO_BOARD));
+
+		departingTrain.addCarriage(new FreightCar(VALID_GROSS_WEIGHT,
+				VALID_GOODS_TYPE));
+
+		departingTrain.board(NUMBER_OF_PASSENGER_TO_BOARD * 2);
+
 		RollingStock rs = departingTrain.firstCarriage();
-		while(rs != null){
+		while (rs != null) {
 			countCarriage++;
 			if (rs instanceof PassengerCar)
-				((PassengerCar)rs).alight(((PassengerCar)rs).numberOnBoard());
+				((PassengerCar) rs).alight(((PassengerCar) rs).numberOnBoard());
 			rs = departingTrain.nextCarriage();
-		}		
-		while (countCarriage-- > 0){
+		}
+		while (countCarriage-- > 0) {
 			departingTrain.removeCarriage();
 		}
-		
-		assertTrue("should not have a locomotive", departingTrain.firstCarriage()==null);
+
+		assertTrue("should not have a locomotive",
+				departingTrain.firstCarriage() == null);
 	}
 
 }
