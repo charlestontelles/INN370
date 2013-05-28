@@ -30,6 +30,24 @@ public class BoardingTrainPanel extends JPanel {
 	 * Mandatory class ID to be used by serialisation
 	 */
 	private static final long serialVersionUID = 1L;
+
+	/**
+	 * Label related to Boarding Panel 
+	 */
+	private static final String DEPARTING_TRAIN_PANEL_TITLE  = " Departing Train";
+
+	private static final String LABEL_PASSENGER  = " Passengers";
+
+	private static final String LABEL_PASSENGER_OUT  = " Passengers out";
+
+	private static final String LABEL_PASSENGER_ONBOARD = "Number On Board:";
+
+	private static final String LABEL_PULLING_POWER = "Pulling Power:  ";
+
+	private static final String LABEL_TRAIN_CAN_MOVE = "Train Can move:  ";
+
+	private static final String LABEL_TOTAL_GROSS_WEIGHT_IN_TONNES = "Total Gross Weight (Tonnes):";
+
 	/**
 	 * Button related to boarding events
 	 */
@@ -76,13 +94,13 @@ public class BoardingTrainPanel extends JPanel {
 		this.setLayout(new GridBagLayout()); // 3,3
 		this.setBackground(Color.LIGHT_GRAY);
 
-		JLabel panelTitle = new JLabel("Departing Train");
-		JLabel lblPassengers = new JLabel("Passengers:");
-		JLabel lblNumberOfSeats = new JLabel("Passengers out:");
-		JLabel lblNumberOnBoard = new JLabel("Number On Board:");
-		JLabel lblCapacity = new JLabel("Pulling Power:  ");
-		JLabel lblCanMove = new JLabel("Train Can move:  ");
-		JLabel lblTotalWeight = new JLabel("Total Gross Weight (Tonnes):");
+		JLabel panelTitle = new JLabel(DEPARTING_TRAIN_PANEL_TITLE);
+		JLabel lblPassengers = new JLabel(LABEL_PASSENGER);
+		JLabel lblNumberOfSeats = new JLabel(LABEL_PASSENGER_OUT);
+		JLabel lblNumberOnBoard = new JLabel(LABEL_PASSENGER_ONBOARD);
+		JLabel lblCapacity = new JLabel(LABEL_PULLING_POWER);
+		JLabel lblCanMove = new JLabel(LABEL_TRAIN_CAN_MOVE);
+		JLabel lblTotalWeight = new JLabel(LABEL_TOTAL_GROSS_WEIGHT_IN_TONNES);
 
 		spnPassengers = new JSpinner();
 
@@ -173,16 +191,16 @@ public class BoardingTrainPanel extends JPanel {
 	public void setPassengerOut(String passengersOutMsg) {
 		int currentValue = txtPassengersOut.getText().length() > 0
 				&& !passengersOutMsg.equalsIgnoreCase("00") ? new Integer(
-				txtPassengersOut.getText()) : 0;
-		if (new Integer(passengersOutMsg) > 0) {
-			txtPassengersOut.setText(""
-					+ (currentValue + new Integer(passengersOutMsg)));
-			txtPassengersOut.setBackground(Color.RED);
-		} else {
-			txtPassengersOut.setText(""
-					+ (currentValue + new Integer(passengersOutMsg)));
-			txtPassengersOut.setBackground(Color.GREEN);
-		}
+						txtPassengersOut.getText()) : 0;
+						if (new Integer(passengersOutMsg) > 0) {
+							txtPassengersOut.setText(""
+									+ (currentValue + new Integer(passengersOutMsg)));
+							txtPassengersOut.setBackground(Color.RED);
+						} else {
+							txtPassengersOut.setText(""
+									+ (currentValue + new Integer(passengersOutMsg)));
+							txtPassengersOut.setBackground(Color.GREEN);
+						}
 	}
 
 	/**
