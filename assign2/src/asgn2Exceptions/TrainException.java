@@ -9,9 +9,8 @@ package asgn2Exceptions;
  * 
  */
 public class TrainException extends Exception {
-
 	/**
-	 * 
+	 * Mandatory class Id used for serialization
 	 */
 	private static final long serialVersionUID = -8463596790935842790L;
 

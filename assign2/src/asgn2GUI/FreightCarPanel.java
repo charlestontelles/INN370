@@ -55,8 +55,6 @@ public class FreightCarPanel extends JPanel {
 
 	/**
 	 * Set the panel layout and arrange the components within the panel
-	 * 
-	 * freightPnl panel is added on the EAST to display the FreightCar control
 	 */
 	public void initComponents() {
 		this.setLayout(new GridBagLayout());

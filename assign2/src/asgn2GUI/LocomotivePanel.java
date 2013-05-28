@@ -59,9 +59,6 @@ public class LocomotivePanel extends JPanel {
 
 	/**
 	 * Set the panel layout and arrange the components within the panel
-	 * 
-	 * TODO: CONVERT TO GRIDBAGLAYOUT locomotivePnl panel is added on the WEST
-	 * to display the locomotive control
 	 */
 	public void initComponents() {
 		setLayout(new GridBagLayout());

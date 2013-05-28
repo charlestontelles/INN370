@@ -71,9 +71,6 @@ public class BoardingTrainPanel extends JPanel {
 
 	/**
 	 * Set the panel layout and arrange the components within the panel
-	 * 
-	 * boardingtPnl panel is added on the NORTH to display the DepartingTrain
-	 * control
 	 */
 	public void initComponents() {
 		this.setLayout(new GridBagLayout()); // 3,3

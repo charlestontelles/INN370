@@ -39,7 +39,9 @@ import asgn2RollingStock.RollingStock;
 public class DepartingTrain {
 
 	/**
-	 * Stores all carriages for a departing trains excluding the locomotive
+	 * Stores all carriages for a departing train
+	 * The first position (index=0) must always
+	 * be a Locomotive
 	 */
 	private List<RollingStock> carriages;
 
@@ -63,7 +65,7 @@ public class DepartingTrain {
 	/**
 	 * Constructs a (potential) train object containing no carriages (yet).
 	 * 
-	 * CarriagePointer is initialized with -1 which means no carriages and no
+	 * CarriagePointer is initialized with 0 which means no carriages and no
 	 * locomotive.
 	 */
 	public DepartingTrain() {

@@ -51,9 +51,6 @@ public class PassengerCarPanel extends JPanel {
 
 	/**
 	 * Set the panel layout and arrange the components within the panel
-	 * 
-	 * passengerPnl panel is added on the SOUTH to display the passengerCar
-	 * control
 	 */
 	public void initComponents() {
 		setLayout(new GridBagLayout());

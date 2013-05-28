@@ -37,7 +37,7 @@ public class RollingStockTests {
 	private static final int NEGATIVE_NUMBER_OF_PASSENGER_TO_DEPART = -1;
 	private static final int NUMBER_OF_PASSENGER_TO_BOARD2 = 30; // A
 	private static final int NUMBER_OF_PASSENGER_TO_ALIGHT = 5; // B
-	private static final int PESSENGER_ON_BOARD = 25; // Difference of A-B
+	private static final int PASSENGER_ON_BOARD = 25; // Difference of A-B
 	private static final int SEATS_CAPACITY = 50;
 	private static final int NEGATIVE_SEATS_CAPACITY = -1;
 
@@ -328,7 +328,7 @@ public class RollingStockTests {
 															// alight/depart
 
 		assertTrue("Invalid alight from the train",
-				passengerCar.numberOnBoard() == PESSENGER_ON_BOARD);
+				passengerCar.numberOnBoard() == PASSENGER_ON_BOARD);
 	}
 
 	/**
@@ -343,11 +343,8 @@ public class RollingStockTests {
 				SEATS_CAPACITY); // seats capacity 50
 
 		passengerCar.board(NUMBER_OF_PASSENGER_TO_BOARD2);// 30 person on board
-
-		int leftOut = passengerCar.board(NUMBER_OF_PASSENGER_TO_BOARD2);// 30
-																		// person
-																		// on
-																		// board
+		// 30 person on board
+		int leftOut = passengerCar.board(NUMBER_OF_PASSENGER_TO_BOARD2);
 
 		assertTrue("Invalid number of passenger left out", leftOut == 10);
 	}

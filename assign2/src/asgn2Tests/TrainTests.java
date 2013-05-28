@@ -459,6 +459,28 @@ public class TrainTests {
 	}
 
 	/**
+	 * Creates a departing train and adds a valid locomotive and a valid passenger car
+	 * with capacity of PASSENGERCAR_SEAT_CAPACITY, then board a number of
+	 * PASSENGERCAR_SEAT_CAPACITY to the train (expected zero passenger to be left out of
+	 * the train.
+	 * Then board a number of PASSENGERCAR_SEAT_CAPACITY again, this time the number
+	 * of passenger left out of the train should be PASSENGERCAR_SEAT_CAPACITY
+	 * 
+	 * @throws TrainException
+	 */
+	@Test
+	public void testOvercrowededTrain() throws TrainException {
+		DepartingTrain departingTrain = new DepartingTrain();
+		departingTrain.addCarriage(new Locomotive(VALID_GROSS_WEIGHT, VALID_CLASSIFICATION));
+		departingTrain.addCarriage(new PassengerCar(VALID_GROSS_WEIGHT, PASSENGERCAR_SEAT_CAPACITY));
+		int passengersLeft = departingTrain.board(PASSENGERCAR_SEAT_CAPACITY);
+		assertTrue("number of passengers left should be zero", passengersLeft == 0);
+		
+		passengersLeft = departingTrain.board(PASSENGERCAR_SEAT_CAPACITY);
+		assertTrue("number of passengers left should be " + PASSENGERCAR_SEAT_CAPACITY, passengersLeft == PASSENGERCAR_SEAT_CAPACITY);
+	}
+	
+	/**
 	 * Uses class reflection to test the number of constructors implemented.
 	 * Expected exactly one constructor
 	 * 

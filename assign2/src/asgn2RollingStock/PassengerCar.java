@@ -23,7 +23,7 @@ public class PassengerCar extends RollingStock {
 	 */
 	private final static String NUM_PASSENGERS_CANNOT_BE_NEGATIVE = "Number of Passengers cannot be negative";
 	private final static String NUM_SEATS_CANNOT_BE_NEGATIVE = "Number of Seats cannot be negative";
-	private final static String CANNOT_ALIGHT_MORE_THAN_BOARDED = "Cannont alight more passengers than boarded";
+	private final static String CANNOT_ALIGHT_MORE_THAN_BOARDED = "Cannot alight more passengers than boarded";
 
 	/**
 	 * Constructs a passenger car with a known weight and a fixed number of
