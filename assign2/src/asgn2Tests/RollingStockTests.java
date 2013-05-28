@@ -40,6 +40,9 @@ public class RollingStockTests {
 	private static final int PASSENGER_ON_BOARD = 25; // Difference of A-B
 	private static final int SEATS_CAPACITY = 50;
 	private static final int NEGATIVE_SEATS_CAPACITY = -1;
+	private static final int PASSENGER_OUT = 10;
+	private static final int LOCOMOTIVE_POWER = 400;
+	private static final int TOTAL_CONSTRUCTOR = 1;
 
 	/**
 	 * Try to create a new Locomotive with negative gross weight. Expected Train
@@ -346,7 +349,7 @@ public class RollingStockTests {
 		// 30 person on board
 		int leftOut = passengerCar.board(NUMBER_OF_PASSENGER_TO_BOARD2);
 
-		assertTrue("Invalid number of passenger left out", leftOut == 10);
+		assertTrue("Invalid number of passenger left out", leftOut == PASSENGER_OUT);
 	}
 
 	/**
@@ -392,7 +395,7 @@ public class RollingStockTests {
 		Locomotive locomotive = new Locomotive(VALID_GROSS_WEIGHT,
 				VALID_CLASSIFICATION);
 
-		assertTrue("Calculation is Invalid", locomotive.power() == 400);
+		assertTrue("Calculation is Invalid", locomotive.power() == LOCOMOTIVE_POWER);
 	}
 
 	/**
@@ -403,11 +406,11 @@ public class RollingStockTests {
 	@Test
 	public void testNumberOfConstructors() throws TrainException {
 		assertTrue("rolling stock has more than one constructor",
-				Locomotive.class.getConstructors().length == 1);
+				Locomotive.class.getConstructors().length == TOTAL_CONSTRUCTOR);
 		assertTrue("rolling stock has more than one constructor",
-				PassengerCar.class.getConstructors().length == 1);
+				PassengerCar.class.getConstructors().length == TOTAL_CONSTRUCTOR);
 		assertTrue("rolling stock has more than one constructor",
-				FreightCar.class.getConstructors().length == 1);
+				FreightCar.class.getConstructors().length == TOTAL_CONSTRUCTOR);
 	}
 
 	/**

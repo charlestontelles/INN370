@@ -30,6 +30,15 @@ public class FreightCarPanel extends JPanel {
 	 */
 	private static final long serialVersionUID = 1L;
 	/**
+	 * Label and radio button label related to FreightCar Panel
+	 */
+	private static final String LABEL_PANEL_TITLE = "Freight Car";
+	private static final String LABEL_KIND_OF_GOODS = "Kind of Goods:";
+	private static final String LABEL_GROSS_WEIGT = "Gross Weight:";
+	private static final String RADIO_BUTTON_GENERAL_GOOD = "[G]-General";
+	private static final String RADIO_BUTTON_REFRIGATOR_GOOD = "[R]-Refrigerated";
+	private static final String RADIO_BUTTON_DANGEROUS_GOOD = "[D]-Dangerous";
+	/**
 	 * Addition Button
 	 */
 	private JButton btnAdd;
@@ -60,15 +69,15 @@ public class FreightCarPanel extends JPanel {
 		this.setLayout(new GridBagLayout());
 		this.setBackground(Color.LIGHT_GRAY);
 
-		JLabel panelTitle = new JLabel("Freight Car");
-		JLabel lblType = new JLabel("Kind of Goods:");
-		JLabel lblWeight = new JLabel("Gross Weight:");
+		JLabel panelTitle = new JLabel(LABEL_PANEL_TITLE);
+		JLabel lblType = new JLabel(LABEL_KIND_OF_GOODS);
+		JLabel lblWeight = new JLabel(LABEL_GROSS_WEIGT);
 
-		JRadioButton generalButton = new JRadioButton("[G]-General");
+		JRadioButton generalButton = new JRadioButton(RADIO_BUTTON_GENERAL_GOOD);
 		generalButton.setBackground(Color.LIGHT_GRAY);
-		JRadioButton refrigeratedButton = new JRadioButton("[R]-Refrigerated");
+		JRadioButton refrigeratedButton = new JRadioButton(RADIO_BUTTON_REFRIGATOR_GOOD);
 		refrigeratedButton.setBackground(Color.LIGHT_GRAY);
-		JRadioButton dangerousButton = new JRadioButton("[D]-Dangerous");
+		JRadioButton dangerousButton = new JRadioButton(RADIO_BUTTON_DANGEROUS_GOOD);
 		dangerousButton.setBackground(Color.LIGHT_GRAY);
 
 		checkBoxGoodsType = new ButtonGroup();

@@ -26,6 +26,13 @@ public class PassengerCarPanel extends JPanel {
 	 */
 	private static final long serialVersionUID = 1L;
 	/**
+	 * Label used for Passenger Panel
+	 */
+	private static final String LABEL_PASSENGER_PANEL = "Passenger Car";
+	private static final String LABEL_SEATS_CAPACITY = "Seats Capacity:";
+	private static final String LABEL_GROSS_WEIGT = "Gross Weight:";
+	private static final String LABEL_BLANK = "";
+	/**
 	 * Addition Button
 	 */
 	private JButton btnAdd;
@@ -56,10 +63,10 @@ public class PassengerCarPanel extends JPanel {
 		setLayout(new GridBagLayout());
 		setBackground(Color.LIGHT_GRAY);
 
-		JLabel panelTitle = new JLabel("Passenger Car");
-		JLabel lblEmpty = new JLabel("");
-		JLabel lblSeats = new JLabel("Seats Capacity:");
-		JLabel lblWeight = new JLabel("Gross Weight:");
+		JLabel panelTitle = new JLabel(LABEL_PASSENGER_PANEL);
+		JLabel lblEmpty = new JLabel(LABEL_BLANK);
+		JLabel lblSeats = new JLabel(LABEL_SEATS_CAPACITY);
+		JLabel lblWeight = new JLabel(LABEL_GROSS_WEIGT);
 
 		spnWeight = new JSpinner();
 		spnSeats = new JSpinner();

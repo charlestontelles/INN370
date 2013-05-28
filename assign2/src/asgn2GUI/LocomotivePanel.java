@@ -10,6 +10,7 @@ import java.util.Enumeration;
 
 import javax.swing.AbstractButton;
 import javax.swing.ButtonGroup;
+import javax.swing.Icon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -29,6 +30,16 @@ public class LocomotivePanel extends JPanel {
 	 * Mandatory class ID to be used by serialisation
 	 */
 	private static final long serialVersionUID = 1L;
+	/**
+	 * Label related to locomotive
+	 */
+	private static final String LABEL_PANEL_LOCOMOTIVE = "Locomotive";
+	private static final String LABEL_ENGINE_TYPE = "Engine Type:";
+	private static final String LABEL_GROSS_WEIGHT = "Gross Weight:";
+	private static final String LABEL_POWER_CLASS = "Power Class:";
+	private static final String LABEL_RADIO_ELECTRIC_TYPE = "[E]-Eletric";
+	private static final String LABEL_RADIO_DIESEL_TYPE = "[D]-Diesel";
+	private static final String LABEL_RADIO_STEAM_TYPE = "[S]-Steam";
 	/**
 	 * Addition Button
 	 */
@@ -64,16 +75,16 @@ public class LocomotivePanel extends JPanel {
 		setLayout(new GridBagLayout());
 		setBackground(Color.LIGHT_GRAY);
 
-		JLabel panelTitle = new JLabel("Locomotive");
-		JLabel lblType = new JLabel("Engine Type:");
-		JLabel lblWeight = new JLabel("Gross Weight:");
-		JLabel lblPowerClass = new JLabel("Power Class:");
+		JLabel panelTitle = new JLabel(LABEL_PANEL_LOCOMOTIVE);
+		JLabel lblType = new JLabel(LABEL_ENGINE_TYPE);
+		JLabel lblWeight = new JLabel(LABEL_GROSS_WEIGHT);
+		JLabel lblPowerClass = new JLabel(LABEL_POWER_CLASS);
 
-		JRadioButton eletricButton = new JRadioButton("[E]-Eletric");
+		JRadioButton eletricButton = new JRadioButton(LABEL_RADIO_ELECTRIC_TYPE);
 		eletricButton.setBackground(Color.LIGHT_GRAY);
-		JRadioButton dieselButton = new JRadioButton("[D]-Diesel");
+		JRadioButton dieselButton = new JRadioButton(LABEL_RADIO_DIESEL_TYPE);
 		dieselButton.setBackground(Color.LIGHT_GRAY);
-		JRadioButton steamButton = new JRadioButton("[S]-Steam");
+		JRadioButton steamButton = new JRadioButton(LABEL_RADIO_STEAM_TYPE);
 		steamButton.setBackground(Color.LIGHT_GRAY);
 
 		checkBoxEngineType = new ButtonGroup();
